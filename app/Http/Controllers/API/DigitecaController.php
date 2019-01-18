@@ -8,11 +8,13 @@ use App\Digiteca;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class DigitecaController extends Controller {
+class DigitecaController extends Controller
+{
 
     public $successStatus = 200;
 
-    public function index() {
+    public function index()
+    {
         return Digiteca::all();
     }
 
@@ -20,7 +22,8 @@ class DigitecaController extends Controller {
 //        return $digiteca;
 //    }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         if (!$this->validarName($request)) {
             return response()->json('Error al crear nombre de digiteca.', 400);
         }
@@ -35,7 +38,8 @@ class DigitecaController extends Controller {
         return response()->json($digiteca, 201);
     }
 
-    public function update(Request $request, Digiteca $digiteca) {
+    public function update(Request $request, Digiteca $digiteca)
+    {
         if ($request->input('web_site')) {
             $request = $this->agregarHttp($request);
         }
@@ -44,12 +48,14 @@ class DigitecaController extends Controller {
         return response()->json($digiteca, 200);
     }
 
-    public function delete(Digiteca $digiteca) {
+    public function delete(Digiteca $digiteca)
+    {
         $digiteca->delete();
         return response()->json('Digiteca eliminada', 204);
     }
 
-    public function validarName(Request $request) {
+    public function validarName(Request $request)
+    {
         $name = $request->input('name');
         if (!$name || !isset($name)) {
             return false;
@@ -57,7 +63,8 @@ class DigitecaController extends Controller {
         return true;
     }
 
-    public function validarWebSite(Request $request) {
+    public function validarWebSite(Request $request)
+    {
         $web_site = $request->input('web_site');
         if (!$web_site || !isset($web_site)) {
             return false;
@@ -65,12 +72,12 @@ class DigitecaController extends Controller {
         return true;
     }
 
-    public function agregarHttp(Request $request) {
+    public function agregarHttp(Request $request)
+    {
         $web_site = $request->input('web_site');
         if (!strpos($web_site, "http://")) {
             $request->merge(['web_site' => "http://" . $web_site]);
         }
         return $request;
     }
-
 }

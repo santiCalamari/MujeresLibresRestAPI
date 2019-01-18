@@ -25,10 +25,10 @@ class PreguntaController extends Controller {
         return $cuestionario_id->get();
     }
 
-    public function store(Request $request) {
-        $pregunta = Pregunta::create($request->all());
-        return response()->json($pregunta, 201);
-    }
+//    public function store(Request $request) {
+//        $pregunta = Pregunta::create($request->all());
+//        return response()->json($pregunta, 201);
+//    }
 //
 //    public function update(Request $request, Pregunta $pregunta) {
 //        $pregunta->update($request->all());

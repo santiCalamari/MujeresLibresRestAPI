@@ -8,20 +8,24 @@ use App\Novedad;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class NovedadController extends Controller {
+class NovedadController extends Controller
+{
 
     public $successStatus = 200;
 
     // modificar para trae las noticias mas recientes
-    public function index() {
+    public function index()
+    {
         return Novedad::all();
     }
 
-    public function show(Novedad $novedad) {
+    public function show(Novedad $novedad)
+    {
         return $novedad;
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         if (!$this->validarTitle($request)) {
             return response()->json('Error. Debe ingresar un titulo', 400);
         }
@@ -42,17 +46,20 @@ class NovedadController extends Controller {
         return response()->json($novedad, 201);
     }
 
-    public function update(Request $request, Novedad $novedad) {
+    public function update(Request $request, Novedad $novedad)
+    {
         $novedad->update($request->all());
         return response()->json($novedad, 200);
     }
 
-    public function delete(Novedad $novedad) {
+    public function delete(Novedad $novedad)
+    {
         $novedad->delete();
         return response()->json(null, 204);
     }
 
-    public function validarTitle(Request $request) {
+    public function validarTitle(Request $request)
+    {
         $title = $request->input('title');
         if (!$title || !isset($title)) {
             return false;
@@ -60,7 +67,8 @@ class NovedadController extends Controller {
         return true;
     }
 
-    public function validarDescription(Request $request) {
+    public function validarDescription(Request $request)
+    {
         $description = $request->input('description');
         if (!$description || !isset($description)) {
             return false;
@@ -68,7 +76,8 @@ class NovedadController extends Controller {
         return true;
     }
 
-    public function validarDateAt(Request $request) {
+    public function validarDateAt(Request $request)
+    {
         $date_at = $request->input('date_at');
         if (!$date_at || !isset($date_at)) {
             return false;
@@ -76,12 +85,12 @@ class NovedadController extends Controller {
         return true;
     }
 
-    public function validarIsNew(Request $request) {
+    public function validarIsNew(Request $request)
+    {
         $isNew = $request->input('isNew');
         if (!$isNew || !isset($isNew)) {
             return false;
         }
         return true;
     }
-
 }

@@ -20,18 +20,18 @@ class RolController extends Controller {
         return $rol;
     }
 
-    public function store(Request $request) {
-        $rol = Rol::create($request->all());
-        return response()->json($rol, 201);
-    }
+//    public function store(Request $request) {
+//        $rol = Rol::create($request->all());
+//        return response()->json($rol, 201);
+//    }
 
-    public function update(Request $request, Rol $rol) {
-        $rol->update($request->all());
-        return response()->json($rol, 200);
-    }
+//    public function update(Request $request, Rol $rol) {
+//        $rol->update($request->all());
+//        return response()->json($rol, 200);
+//    }
 
-    public function delete(Rol $rol) {
-        $rol->delete();
-        return response()->json('Rol eliminada', 204);
-    }  
+//    public function delete(Rol $rol) {
+//        $rol->delete();
+//        return response()->json('Rol eliminada', 204);
+//    }  
 }
