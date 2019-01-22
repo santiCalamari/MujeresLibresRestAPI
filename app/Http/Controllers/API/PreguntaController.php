@@ -18,11 +18,12 @@ class PreguntaController extends Controller {
 
     //obtiene todas las preguntas para un cuestionario
     public function show($cuestionario_id) {
-        $preguntas = new Preguntas();
-        $preguntas->newQuery();
-        $preguntas->where('cuestionario_id', $cuestionario_id);
+        $preguntas = new Pregunta();
+//        $preguntas->newQuery();
+//        $preguntas->where('id',2);
+        $preguntas = Pregunta::find(2);
 
-        return $cuestionario_id->get();
+        return $preguntas->get();
     }
 
 //    public function store(Request $request) {
