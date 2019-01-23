@@ -14,25 +14,16 @@ class NovedadController extends Controller {
 
     // modificar para trae las noticias mas recientes
     public function index() {
-//        $now = new \DateTime('now');
-//        $start = date_add($now, date_interval_create_from_date_string('5 days'));
-//        $end = (new \DateTime())->modify('-3 day');
-//        $start = date('Y-m-d' . ' 2019-03-09', time());
-//        $end = date('Y-m-d' . ' 2019-03-12', time());
-//        $start = '2019-03-09';
-//        $end = '2019-01-12';
-        $novedades = new Novedad();
-        $novedades->newQuery();
-        $novedades->where('id', 2);
-//        $novedades->where('date_at', '<=', $end);
-//        $novedades->whereBetween('date_at', [$start, $end]);
-        return $novedades->get();
+        $now = new \DateTime('now');
+        $novedad = Novedad::where('date_at', $now)->get();
+        return $novedad;
     }
 
     public function show(Novedad $novedad) {
         return $novedad;
     }
-
+    
+    // date_at: mm/dd/aaa
     public function store(Request $request) {
         if (!$this->validarIsNew($request)) {
             return response()->json('Error al crear la novedad.', 400);

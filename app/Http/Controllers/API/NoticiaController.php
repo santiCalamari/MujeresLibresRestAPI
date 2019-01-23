@@ -13,17 +13,18 @@ class NoticiaController extends Controller
 
     public $successStatus = 200;
 
-    // modificar para trae las noticias mas recientes
+    // ordeno por id y traigo los ultimos 12
     public function index()
     {
-        return Noticia::all();
+        return Noticia::orderBy('id','desc')->take(10)->get();
     }
 
     public function show(Noticia $noticia)
     {
         return $noticia;
     }
-
+    
+    // date_at: dd/mm/aaaa
     public function store(Request $request)
     {
         if (!$this->validarTitle($request)) {

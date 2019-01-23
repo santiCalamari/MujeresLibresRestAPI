@@ -11,19 +11,15 @@ use Validator;
 class PreguntaController extends Controller {
 
     public $successStatus = 200;
-    
+
     public function index() {
         return Pregunta::all();
     }
 
     //obtiene todas las preguntas para un cuestionario
     public function show($cuestionario_id) {
-        $preguntas = new Pregunta();
-//        $preguntas->newQuery();
-//        $preguntas->where('id',2);
-        $preguntas = Pregunta::find(2);
-
-        return $preguntas->get();
+        $pregunta = Pregunta::where('cuestionario_id', $cuestionario_id)->get();
+        return $pregunta;
     }
 
 //    public function store(Request $request) {

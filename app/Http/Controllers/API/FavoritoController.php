@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -8,8 +8,7 @@ use App\Favorito;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class FavoritoController extends Controller
-{
+class FavoritoController extends Controller {
 
     public $successStatus = 200;
 
@@ -17,20 +16,23 @@ class FavoritoController extends Controller
 //        return Favorito::all();
 //    }
 
-    public function show($user_id)
-    {
-        $centroAyuda = new \App\CentroAyuda();
-        $centroAyuda->newQuery();
-        $centroAyuda->where('user_id', $user_id)->get();
-
-        if (!$centroAyuda) {
-            return response()->json('No existen centros de ayuda en favoritos', 400);
+    public function show($user_id) {
+        if ($favoritos = Favorito::where('user_id', $user_id)->get()->toArray()) {
+            $centros_ayuda = array();
+            foreach ($favoritos as $k => $fav) {
+                $id_centro_ayuda = $fav['centro_ayuda_id'];
+                if (!$centroAyuda = \App\CentroAyuda::where('id', $id_centro_ayuda)->get()->toArray()) {
+                    return response()->json('Centro de ayuda no encontrado.', 400);
+                }
+                $centros_ayuda[] = $centroAyuda;
+            }
+            return $centros_ayuda;
+        } else {
+            return response()->json('Error al buscar favoritos para el usuario seleccionado', 400);
         }
-        return $centroAyuda->get();
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         if (!$this->validarUserId($request)) {
             return response()->json('Error al agregar a favoritos un centro de ayuda. Usuario inexistente.', 400);
         }
@@ -48,36 +50,35 @@ class FavoritoController extends Controller
 //        return response()->json($favorito, 200);
 //    }
 
-    public function delete(Favorito $favorito)
-    {
+    public function delete(Favorito $favorito) {
         $favorito->delete();
         return response()->json('Centro de ayuda eliminado de favoritos', 204);
     }
 
-    public function validarUserId(Request $request)
-    {
+    public function validarUserId(Request $request) {
         $user_id = $request->input('user_id');
         if (!$user_id || !isset($user_id)) {
             return false;
         }
-        return true;
+
+        $user = \App\User::where('id', $user_id)->get();
+        if (emptyArray($user)) {
+            return true;
+        }
+        return false;
     }
 
-    public function validarCentroAyudaId(Request $request)
-    {
+    public function validarCentroAyudaId(Request $request) {
         $centro_ayuda_id = $request->input('centro_ayuda_id');
         if (!$centro_ayuda_id || !isset($centro_ayuda_id)) {
             return false;
         }
 
-        $opinion = new Opinion();
-        $opinion->newQuery();
-        $opinion->where('centro_ayuda_id', $request->input());
-
-        if ($opinion->get()) {
-            return false;
+        $opinion = \App\Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get();
+        if (emptyArray($opinion)) {
+            return true;
         }
-
-        return true;
+        return false;
     }
+
 }

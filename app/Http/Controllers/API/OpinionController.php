@@ -8,8 +8,7 @@ use App\Opinion;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class OpinionController extends Controller
-{
+class OpinionController extends Controller {
 
     public $successStatus = 200;
 
@@ -17,20 +16,14 @@ class OpinionController extends Controller
 //        return Opinion::all();
 //    }
 
-    public function show($centro_ayuda_id)
-    {
-        $opinion = new Opinion();
-        $opinion->newQuery();
-        $opinion->where('id', $centro_ayuda_id)->get();
-
-        if (!$opinion) {
+    public function show($centro_ayuda_id) {
+        if (!$opinion = Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get()) {
             return response()->json('No se encontro opinion registrada para el centro de ayuda seleccionado.', 400);
         }
-        return $opinion->get();
+        return $opinion;
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         if (!$this->validarName($request)) {
             return response()->json('Error al calificar un centro de ayuda.', 400);
         }
@@ -51,8 +44,15 @@ class OpinionController extends Controller
         return response()->json($opinion, 201);
     }
 
-    public function update(Request $request, $centro_ayuda_id)
-    {
+    public function update(Request $request, $centro_ayuda_id) {
+         if (!$this->validarUserId($request)) {
+            return response()->json('Error al calificar un centro de ayuda. Usuario inexistente.', 400);
+        }
+
+        if (!$this->validarCentroAyudaId($request)) {
+            return response()->json('Error al calificar un centro de ayuda. Centro de ayuda no definido o ya existente', 400);
+        }
+        
         $opinion = new Opinion();
         $opinion->newQuery();
         $opinion->where('centro_ayuda_id', $centro_ayuda_id)->update($request->all());
@@ -65,8 +65,7 @@ class OpinionController extends Controller
 //        return response()->json('Opinion eliminada', 204);
 //    }
 
-    public function validarName(Request $request)
-    {
+    public function validarName(Request $request) {
         $name = $request->input('name');
         if (!$name || !isset($name)) {
             return false;
@@ -74,8 +73,7 @@ class OpinionController extends Controller
         return true;
     }
 
-    public function validarAverage(Request $request)
-    {
+    public function validarAverage(Request $request) {
         $average = $request->input('average');
         if (!$average || !isset($average)) {
             return false;
@@ -83,30 +81,30 @@ class OpinionController extends Controller
         return true;
     }
 
-    public function validarUserId(Request $request)
-    {
+    public function validarUserId(Request $request) {
         $user_id = $request->input('user_id');
         if (!$user_id || !isset($user_id)) {
             return false;
         }
-        return true;
+
+        $user = \App\User::where('id', $user_id)->get();
+        if (emptyArray($user)) {
+            return true;
+        }
+        return false;
     }
 
-    public function validarCentroAyudaId(Request $request)
-    {
+    public function validarCentroAyudaId(Request $request) {
         $centro_ayuda_id = $request->input('centro_ayuda_id');
         if (!$centro_ayuda_id || !isset($centro_ayuda_id)) {
             return false;
         }
 
-        $opinion = new Opinion();
-        $opinion->newQuery();
-        $opinion->where('centro_ayuda_id', $request->input());
-
-        if ($opinion->get()) {
-            return false;
+        $opinion = \App\Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get();
+        if (emptyArray($opinion)) {
+            return true;
         }
-
-        return true;
+        return false;
     }
+
 }
