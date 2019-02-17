@@ -24,11 +24,11 @@ class FavoritoController extends Controller {
                 if (!$centroAyuda = \App\CentroAyuda::where('id', $id_centro_ayuda)->get()->toArray()) {
                     return response()->json('Centro de ayuda no encontrado.', 400);
                 }
-                $centros_ayuda[] = $centroAyuda;
+                $centros_ayuda[] = $centroAyuda[0];
             }
             return $centros_ayuda;
         } else {
-            return response()->json('Error al buscar favoritos para el usuario seleccionado', 400);
+            return [];
         }
     }
 
@@ -50,9 +50,12 @@ class FavoritoController extends Controller {
 //        return response()->json($favorito, 200);
 //    }
 
-    public function delete(Favorito $favorito) {
-        $favorito->delete();
-        return response()->json('Centro de ayuda eliminado de favoritos', 204);
+    public function delete($user_id, $centro_ayuda_id) {
+        if($favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->delete()){
+            return response()->json('Centro de ayuda eliminado de favoritos', 204);
+        }else{
+            return response()->json('Error al eliminar centro de ayuda de favoritos', 500);
+        }
     }
 
     public function validarUserId(Request $request) {
@@ -80,5 +83,4 @@ class FavoritoController extends Controller {
         }
         return false;
     }
-
 }

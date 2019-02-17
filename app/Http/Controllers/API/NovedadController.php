@@ -12,10 +12,13 @@ class NovedadController extends Controller {
 
     public $successStatus = 200;
 
-    // modificar para trae las noticias mas recientes
-    public function index() {
-        $now = new \DateTime('now');
-        $novedad = Novedad::where('date_at', $now)->get();
+    public function index($date) {
+        $calendar = explode("-", $date);
+        $dia = $calendar[0];
+        $mes = $calendar[1];
+        $anio = $calendar[2];
+        $fecha = $anio.'-'.$mes.'-'.$dia;
+        $novedad = Novedad::where('date_at', $fecha)->get();
         return $novedad;
     }
 
@@ -23,7 +26,6 @@ class NovedadController extends Controller {
         return $novedad;
     }
     
-    // date_at: mm/dd/aaa
     public function store(Request $request) {
         if (!$this->validarIsNew($request)) {
             return response()->json('Error al crear la novedad.', 400);
@@ -40,9 +42,14 @@ class NovedadController extends Controller {
         if (!$this->validarDescription($request)) {
             return response()->json('Error. Debe ingresar una descripcion.', 400);
         }
+        $fecha = explode("/", $request->input('date_at'));
+        $dia = $fecha[0];
+        $mes = $fecha[1];
+        $anio = $fecha[2];
+        $fecha = $mes.'/'.$dia.'/'.$anio;
         $request->merge([
-            'date_at' => new \DateTime($request->input('date_at')),
-        ]);
+            'date_at' => new \DateTime($fecha),
+        ]);        
         $novedad = Novedad::create($request->all());
         return response()->json($novedad, 201);
     }
@@ -63,7 +70,6 @@ class NovedadController extends Controller {
         if (!$this->validarDescription($request)) {
             return response()->json('Error. Debe ingresar una descripcion.', 400);
         }
-
         $novedad->update($request->all());
         return response()->json($novedad, 200);
     }

@@ -18,9 +18,9 @@ class DigitecaController extends Controller
         return Digiteca::all();
     }
 
-//    public function show(Digiteca $digiteca) {
-//        return $digiteca;
-//    }
+    public function show(Digiteca $digiteca) {
+        return $digiteca;
+    }
 
     public function store(Request $request)
     {
@@ -41,11 +41,11 @@ class DigitecaController extends Controller
     public function update(Request $request, Digiteca $digiteca)
     {
          if (!$this->validarName($request)) {
-            return response()->json('Error al crear nombre de digiteca.', 400);
+            return response()->json('Error al editar nombre de digiteca.', 400);
         }
 
         if (!$this->validarWebSite($request)) {
-            return response()->json('Error al crear sitio web de digiteca.', 400);
+            return response()->json('Error al editar sitio web de digiteca.', 400);
         }
         
         if ($request->input('web_site')) {

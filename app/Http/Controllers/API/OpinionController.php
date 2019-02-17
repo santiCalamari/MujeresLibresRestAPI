@@ -17,14 +17,14 @@ class OpinionController extends Controller {
 //    }
 
     public function show($centro_ayuda_id) {
-        if (!$opinion = Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get()) {
+        if (!$opinion = Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get()->toArray()) {
             return response()->json('No se encontro opinion registrada para el centro de ayuda seleccionado.', 400);
         }
         return $opinion;
     }
 
     public function store(Request $request) {
-        if (!$this->validarName($request)) {
+	if (!$this->validarName($request)) {
             return response()->json('Error al calificar un centro de ayuda.', 400);
         }
 
@@ -40,8 +40,12 @@ class OpinionController extends Controller {
             return response()->json('Error. Debe ingresar una calificacion.', 400);
         }
 
-        $opinion = Opinion::create($request->all());
-        return response()->json($opinion, 201);
+        if(!$opinion = Opinion::where('centro_ayuda_id', $request->input('centro_ayuda_id'))->get()->toArray()){
+            $opinion = Opinion::create($request->all());
+            return response()->json($opinion, 201);
+        }else{
+            return response()->json('Error. Ya existe un centro de ayuda con una opinion. Debe actualizar', 400);
+        }
     }
 
     public function update(Request $request, $centro_ayuda_id) {
@@ -53,11 +57,14 @@ class OpinionController extends Controller {
             return response()->json('Error al calificar un centro de ayuda. Centro de ayuda no definido o ya existente', 400);
         }
         
-        $opinion = new Opinion();
-        $opinion->newQuery();
-        $opinion->where('centro_ayuda_id', $centro_ayuda_id)->update($request->all());
-
-        return response()->json($opinion, 200);
+        if($opinion = Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get()->toArray()){
+            $opinion = new Opinion();
+    	    $opinion->newQuery();
+    	    $opinion->where('centro_ayuda_id', $centro_ayuda_id)->update($request->all());
+    	    return response()->json($opinion, 200);
+    	}else{
+    	    return response()->json('Error al actulizar la opinion en el centro de ayuda');
+    	}
     }
 
 //    public function delete(Opinion $opinion) {

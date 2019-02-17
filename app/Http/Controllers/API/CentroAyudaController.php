@@ -18,14 +18,11 @@ class CentroAyudaController extends Controller
 //    }
 
     
-//    public function show($user_id) {
-//        $misCentrosAyuda = new CentroAyuda();
-//        $misCentrosAyuda->newQuery();
-//        $misCentrosAyuda->where('user_id', $user_id);
-//
-//        return $misCentrosAyuda->get();
-//    }
-//    public function store(Request $request) {
+    public function show($centro_ayuda_id) {
+        return CentroAyuda::where('id', $centro_ayuda_id)->get();        
+    }
+
+    //    public function store(Request $request) {
 //        $centroAyuda = CentroAyuda::create($request->all());
 //        return response()->json($centroAyuda, 201);
 //    }

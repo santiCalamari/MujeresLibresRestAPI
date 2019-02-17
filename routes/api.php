@@ -16,17 +16,17 @@ Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
 
-Route::group(['middleware' => 'auth:api'], function() {
+//Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', 'API\UserController@logout');
     Route::post('details', 'API\UserController@details');
 
     Route::get('digiteca', 'API\DigitecaController@index');
-//    Route::get('digiteca/{digiteca}', 'API\DigitecaController@show');
+    Route::get('digiteca/{digiteca}', 'API\DigitecaController@show');
     Route::post('digiteca', 'API\DigitecaController@store');
     Route::put('digiteca/{digiteca}', 'API\DigitecaController@update');
     Route::delete('digiteca/{digiteca}', 'API\DigitecaController@delete');
 //
-    Route::get('novedad', 'API\NovedadController@index');
+    Route::get('novedad/dia/{date}', 'API\NovedadController@index');
     Route::get('novedad/{novedad}', 'API\NovedadController@show');
     Route::post('novedad', 'API\NovedadController@store');
     Route::put('novedad/{novedad}', 'API\NovedadController@update');
@@ -48,10 +48,10 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('favorito/{user_id}', 'API\FavoritoController@show');
     Route::post('favorito', 'API\FavoritoController@store');
 //    Route::put('favorito/{centro_ayuda_id}', 'API\OpinionController@update');
-    Route::delete('favorito/{favorito}', 'API\FavoritoController@delete');
+    Route::delete('favorito/{user_id}/{centro_ayuda_id}', 'API\FavoritoController@delete');
 
 //    Route::get('centro-de-ayuda', 'API\CentroAyudaController@index');
-//    Route::get('centro-de-ayuda/{user_id}', 'API\CentroAyudaController@show');
+    Route::get('centro-de-ayuda/{centro_ayuda_id}', 'API\CentroAyudaController@show');
 //    Route::post('centro-de-ayuda', 'API\CentroAyudaController@store');
     Route::put('centro-de-ayuda/{centroAyuda}', 'API\CentroAyudaController@update');
 //    Route::delete('centro-de-ayuda/{centroAyuda}', 'API\CentroAyudaController@delete');
@@ -74,4 +74,4 @@ Route::group(['middleware' => 'auth:api'], function() {
 //    Route::post('rol', 'API\RolController@store');
 //    Route::put('rol/{rol}', 'API\RolController@update');
 //    Route::delete('rol/{rol}', 'API\RolController@delete');
-});
+//});

@@ -10,7 +10,6 @@ use Validator;
 
 class NoticiaController extends Controller
 {
-
     public $successStatus = 200;
 
     // ordeno por id y traigo los ultimos 12
@@ -57,7 +56,7 @@ class NoticiaController extends Controller
 
     public function validarTitle(Request $request)
     {
-        $title = $request->input('title');
+        $title = $request->input('titlte');
         if (!$title || !isset($title)) {
             return false;
         }
