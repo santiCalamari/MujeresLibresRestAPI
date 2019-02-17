@@ -22,7 +22,7 @@ class CentroAyudaController extends Controller
         return CentroAyuda::where('id', $centro_ayuda_id)->get();        
     }
 
-    //    public function store(Request $request) {
+//        public function store(Request $request) {
 //        $centroAyuda = CentroAyuda::create($request->all());
 //        return response()->json($centroAyuda, 201);
 //    }

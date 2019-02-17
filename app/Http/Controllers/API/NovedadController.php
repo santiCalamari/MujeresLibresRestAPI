@@ -70,6 +70,14 @@ class NovedadController extends Controller {
         if (!$this->validarDescription($request)) {
             return response()->json('Error. Debe ingresar una descripcion.', 400);
         }
+        $fecha = explode("/", $request->input('date_at'));
+        $dia = $fecha[0];
+        $mes = $fecha[1];
+        $anio = $fecha[2];
+        $fecha = $mes.'/'.$dia.'/'.$anio;
+        $request->merge([
+            'date_at' => new \DateTime($fecha),
+        ]); 
         $novedad->update($request->all());
         return response()->json($novedad, 200);
     }
