@@ -39,7 +39,7 @@ Route::post('register', 'API\UserController@register');
     Route::delete('noticia/{noticia}', 'API\NoticiaController@delete');
 
 //    Route::get('opinion', 'API\OpinionController@index');
-    Route::get('opinion/{centro_ayuda_id}', 'API\OpinionController@show');
+    Route::get('opinion/{user_id}/{centro_ayuda_id}', 'API\OpinionController@show');
     Route::post('opinion', 'API\OpinionController@store');
     Route::put('opinion/{centro_ayuda_id}', 'API\OpinionController@update');
 //    Route::delete('opinion/{opinion}', 'API\OpinionController@delete');
