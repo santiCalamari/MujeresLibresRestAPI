@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Opinion;
+use App\CentroAyuda;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -24,7 +25,7 @@ class OpinionController extends Controller {
     }
 
     public function store(Request $request) {
-	if (!$this->validarName($request)) {
+        if (!$this->validarName($request)) {
             return response()->json('Error al calificar un centro de ayuda.', 400);
         }
 
@@ -40,31 +41,39 @@ class OpinionController extends Controller {
             return response()->json('Error. Debe ingresar una calificacion.', 400);
         }
 
-        if(!$opinion = Opinion::where('centro_ayuda_id', $request->input('centro_ayuda_id'))->get()->toArray()){
+        if (!$opinion = Opinion::where('centro_ayuda_id', $request->input('centro_ayuda_id'))->get()->toArray()) {
             $opinion = Opinion::create($request->all());
-            return response()->json($opinion, 201);
-        }else{
+            if ($this->updateCentroAyuda($request->input('centro_ayuda_id'), $request->input('average'))) {
+                return response()->json($opinion, 201);
+            } else {
+                return response()->json('Error. Ya existe no se encontro el centro de ayuda.', 400);
+            }
+        } else {
             return response()->json('Error. Ya existe un centro de ayuda con una opinion. Debe actualizar', 400);
         }
     }
 
     public function update(Request $request, $centro_ayuda_id) {
-         if (!$this->validarUserId($request)) {
+        if (!$this->validarUserId($request)) {
             return response()->json('Error al calificar un centro de ayuda. Usuario inexistente.', 400);
         }
 
         if (!$this->validarCentroAyudaId($request)) {
             return response()->json('Error al calificar un centro de ayuda. Centro de ayuda no definido o ya existente', 400);
         }
-        
-        if($opinion = Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get()->toArray()){
+
+        if ($opinion = Opinion::where('centro_ayuda_id', $centro_ayuda_id)->get()->toArray()) {
             $opinion = new Opinion();
-    	    $opinion->newQuery();
-    	    $opinion->where('centro_ayuda_id', $centro_ayuda_id)->update($request->all());
-    	    return response()->json($opinion, 200);
-    	}else{
-    	    return response()->json('Error al actulizar la opinion en el centro de ayuda');
-    	}
+            $opinion->newQuery();
+            $opinion->where('centro_ayuda_id', $centro_ayuda_id)->update($request->all());
+            if ($this->updateCentroAyuda($request->input('centro_ayuda_id'), $request->input('average'))) {
+                return response()->json($opinion, 201);
+            } else {
+                return response()->json('Error. Ya existe no se encontro el centro de ayuda.', 400);
+            }
+        } else {
+            return response()->json('Error al actulizar la opinion en el centro de ayuda');
+        }
     }
 
 //    public function delete(Opinion $opinion) {
@@ -112,6 +121,17 @@ class OpinionController extends Controller {
             return true;
         }
         return false;
+    }
+
+    public function updateCentroAyuda($centro_ayuda_id, $average) {
+        if ($centroAyuda = CentroAyuda::where('id', $centro_ayuda_id)->get()->toArray()) {
+            $voters = $centroAyuda[0]['voters'];
+            $general = (($centroAyuda[0]['average_general'] * $voters) + $average)/($voters+1);
+            CentroAyuda::where('id',$centro_ayuda_id)->update(['voters'=>$voters+1, 'average_general'=> $general]);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
