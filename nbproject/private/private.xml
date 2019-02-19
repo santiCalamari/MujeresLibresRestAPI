@@ -5,8 +5,6 @@
         <group>
             <file>file:/var/www/html/restapisfm/routes/api.php</file>
             <file>file:/var/www/html/restapisfm/app/Http/Controllers/API/FavoritoController.php</file>
-            <file>file:/var/www/html/restapisfm/app/Http/Controllers/API/OpinionController.php</file>
-            <file>file:/var/www/html/restapisfm/app/Opinion.php</file>
         </group>
     </open-files>
 </project-private>

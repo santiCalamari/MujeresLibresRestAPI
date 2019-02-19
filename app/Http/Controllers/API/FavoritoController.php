@@ -40,8 +40,13 @@ class FavoritoController extends Controller {
         if (!$this->validarCentroAyudaId($request)) {
             return response()->json('Error al agregar a favoritos un centro de ayuda. Centro de ayuda no definido o ya existente', 400);
         }
-        $favorito = Favorito::create($request->all());
-        return response()->json($favorito, 201);
+
+        if (!$favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->delete()) {
+            $favorito = Favorito::create($request->all());
+            return response()->json($favorito, 201);
+        } else {
+            return response()->json('El centro de ayuda ya se encuentra en favoritos.', 400);
+        }
     }
 
 //    public function update(Request $request, Favorito $favorito)
@@ -51,9 +56,9 @@ class FavoritoController extends Controller {
 //    }
 
     public function delete($user_id, $centro_ayuda_id) {
-        if($favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->delete()){
+        if ($favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->delete()) {
             return response()->json('Centro de ayuda eliminado de favoritos', 204);
-        }else{
+        } else {
             return response()->json('Error al eliminar centro de ayuda de favoritos', 500);
         }
     }
@@ -83,4 +88,5 @@ class FavoritoController extends Controller {
         }
         return false;
     }
+
 }
