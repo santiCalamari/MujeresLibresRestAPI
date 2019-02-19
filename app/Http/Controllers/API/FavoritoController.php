@@ -56,10 +56,12 @@ class FavoritoController extends Controller {
 //    }
 
     public function delete($user_id, $centro_ayuda_id) {
-        if ($favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->delete()) {
-            return response()->json('Centro de ayuda eliminado de favoritos', 204);
-        } else {
+        $favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->get();
+        if (empty($favorito)) {
             return response()->json('Error al eliminar centro de ayuda de favoritos', 500);
+        } else {
+            $favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->delete();
+            return response()->json('Centro de ayuda eliminado de favoritos', 204);
         }
     }
 
