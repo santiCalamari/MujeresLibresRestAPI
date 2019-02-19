@@ -19,6 +19,7 @@ Route::post('register', 'API\UserController@register');
 //Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', 'API\UserController@logout');
     Route::post('details', 'API\UserController@details');
+    Route::post('change-password', 'API\UserController@changePassword');
 
     Route::get('digiteca', 'API\DigitecaController@index');
     Route::get('digiteca/{digiteca}', 'API\DigitecaController@show');
@@ -41,7 +42,7 @@ Route::post('register', 'API\UserController@register');
 //    Route::get('opinion', 'API\OpinionController@index');
     Route::get('opinion/{user_id}/{centro_ayuda_id}', 'API\OpinionController@show');
     Route::post('opinion', 'API\OpinionController@store');
-    Route::put('opinion/{centro_ayuda_id}', 'API\OpinionController@update');
+//    Route::put('opinion/{centro_ayuda_id}', 'API\OpinionController@update');
 //    Route::delete('opinion/{opinion}', 'API\OpinionController@delete');
 //    
 //    Route::get('favorito', 'API\OpinionController@index');
