@@ -41,7 +41,8 @@ class FavoritoController extends Controller {
             return response()->json('Error al agregar a favoritos un centro de ayuda. Centro de ayuda no definido o ya existente', 400);
         }
 
-        if (!$favorito = Favorito::where('user_id', $request->input('user_id'))->where('centro_ayuda_id', $request->input('centro_ayuda_id'))->delete()) {
+        $favorito = Favorito::where('user_id', $request->input('user_id'))->where('centro_ayuda_id', $request->input('centro_ayuda_id'))->get()->toArray();
+        if (empty($favorito)) {
             $favorito = Favorito::create($request->all());
             return response()->json($favorito, 201);
         } else {

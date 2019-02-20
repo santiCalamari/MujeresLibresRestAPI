@@ -80,7 +80,7 @@ class UserController extends Controller {
      */
     public function changePassword(Request $request) {
         $data = $request->all();
-        if ($data['oldPassword'] !== $data['c_oldPassword']) {
+        if ($data['newPassword'] !== $data['newPassword_c']) {
             return response()->json("Las contrasena no coinciden", 500);
         }
         if (isset($data['oldPassword']) && !empty($data['oldPassword']) && $data['oldPassword'] !== "" && $data['oldPassword'] !== 'undefined') {

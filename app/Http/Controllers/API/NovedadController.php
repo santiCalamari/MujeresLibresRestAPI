@@ -88,7 +88,7 @@ class NovedadController extends Controller {
     }
 
     public function validarTitle(Request $request) {
-        $title = $request->input('title');
+        $title = $request->input('titlte');
         if (!$title || !isset($title)) {
             return false;
         }
