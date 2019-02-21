@@ -51,7 +51,8 @@ class NovedadController extends Controller {
             'date_at' => new \DateTime($fecha),
         ]);        
         $novedad = Novedad::create($request->all());
-        return response()->json($novedad, 201);
+        $novedad = Novedad::where('id', $novedad['attributes']['id'])->get();
+        return response()->json($novedad[0], 201);
     }
 
     public function update(Request $request, Novedad $novedad) {
@@ -79,7 +80,8 @@ class NovedadController extends Controller {
             'date_at' => new \DateTime($fecha),
         ]); 
         $novedad->update($request->all());
-        return response()->json($novedad, 200);
+        $novedad = Novedad::where('id', $novedad['attributes']['id'])->get();
+        return response()->json($novedad[0], 201);
     }
 
     public function delete(Novedad $novedad) {
