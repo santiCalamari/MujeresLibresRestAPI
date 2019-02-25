@@ -16,10 +16,11 @@ Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
 
-Route::group(['middleware' => 'auth:api'], function() {
+//Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', 'API\UserController@logout');
     Route::post('details', 'API\UserController@details');
     Route::post('change-password', 'API\UserController@changePassword');
+    Route::put('es-voluntario/{user_id}', 'API\UserController@voluntario');
 
     Route::get('digiteca', 'API\DigitecaController@index');
     Route::get('digiteca/{digiteca}', 'API\DigitecaController@show');
@@ -75,4 +76,4 @@ Route::group(['middleware' => 'auth:api'], function() {
 //    Route::post('rol', 'API\RolController@store');
 //    Route::put('rol/{rol}', 'API\RolController@update');
 //    Route::delete('rol/{rol}', 'API\RolController@delete');
-});
+//});

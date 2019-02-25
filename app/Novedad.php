@@ -16,6 +16,6 @@ class Novedad extends Model {
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'date_at', 'address', 'isNew'];
+    protected $fillable = ['titlte', 'description', 'date_at', 'address', 'isNew'];
 
 }

@@ -84,14 +84,26 @@ class UserController extends Controller {
             return response()->json("Las contrasena no coinciden", 500);
         }
         if (isset($data['oldPassword']) && !empty($data['oldPassword']) && $data['oldPassword'] !== "" && $data['oldPassword'] !== 'undefined') {
-                $user = Auth::user();
-                $user->password = bcrypt($data['newPassword']);
-                $user->AauthAcessToken()->delete();
-                $success['token'] = $user->createToken('MyApp')->accessToken;
-                $user->save();
-                return response()->json(['success' => $success], $this->successStatus);
+            $user = Auth::user();
+            $user->password = bcrypt($data['newPassword']);
+            $user->AauthAcessToken()->delete();
+            $success['token'] = $user->createToken('MyApp')->accessToken;
+            $user->save();
+            return response()->json(['success' => $success], $this->successStatus);
         }
         return response()->json("Error al cambiar la contrasena", 500);
+    }
+
+    /**
+     * details api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function voluntario($user_id) {
+        $user = User::where('id', $user_id)->get()->toArray();
+        $user["es_voluntario"] = true;
+        $user->update();
+        return response()->json($user, 200);
     }
 
 }
