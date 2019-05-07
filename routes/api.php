@@ -15,12 +15,13 @@ use Illuminate\Http\Request;
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
-
-//Route::group(['middleware' => 'auth:api'], function() {
+Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', 'API\UserController@logout');
     Route::post('details', 'API\UserController@details');
     Route::post('change-password', 'API\UserController@changePassword');
     Route::put('es-voluntario/{user_id}', 'API\UserController@voluntario');
+    Route::put('actualizar-usuario/{user}', 'API\UserController@actualizarUsuario');
+    Route::post('recuperar-password', 'API\UserController@recuperarPassword');
 
     Route::get('digiteca', 'API\DigitecaController@index');
     Route::get('digiteca/{digiteca}', 'API\DigitecaController@show');
@@ -29,6 +30,7 @@ Route::post('register', 'API\UserController@register');
     Route::delete('digiteca/{digiteca}', 'API\DigitecaController@delete');
 //
     Route::get('novedad/dia/{date}', 'API\NovedadController@index');
+    Route::get('novedad/todas', 'API\NovedadController@getAll');
     Route::get('novedad/{novedad}', 'API\NovedadController@show');
     Route::post('novedad', 'API\NovedadController@store');
     Route::put('novedad/{novedad}', 'API\NovedadController@update');
@@ -76,4 +78,4 @@ Route::post('register', 'API\UserController@register');
 //    Route::post('rol', 'API\RolController@store');
 //    Route::put('rol/{rol}', 'API\RolController@update');
 //    Route::delete('rol/{rol}', 'API\RolController@delete');
-//});
+});

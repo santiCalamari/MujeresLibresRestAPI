@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
@@ -13,9 +13,9 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #4d3b5a;
-                color: #fff;
-                font-family: 'Raleway', sans-serif;
+                background-color: #863186  !important;
+                color: #ffffff !important;
+                font-family: 'Raleway', sans-serif !important;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -50,7 +50,7 @@
             }
 
             .links > a {
-                color: #fff;
+                color: #ffffff;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -82,8 +82,12 @@
                     Santa Fe Mujeres
                 </div>
 
-                <div class="title m-b-md">
-                    Rest API
+                <div class="links">
+                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>

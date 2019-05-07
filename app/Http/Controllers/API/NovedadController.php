@@ -22,6 +22,11 @@ class NovedadController extends Controller {
         return $novedad;
     }
 
+    public function getAll() {
+        $novedad = Novedad::where('isNew', true)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
+        return $novedad;
+    }
+
     public function show(Novedad $novedad) {
         return $novedad;
     }
@@ -34,7 +39,7 @@ class NovedadController extends Controller {
         if (!$this->validarTitle($request)) {
             return response()->json('Error. Debe ingresar un titulo', 400);
         }
-
+        
         if (!$this->validarDateAt($request)) {
             return response()->json('Error. Debe ingresar un fecha de publicacion', 400);
         }
