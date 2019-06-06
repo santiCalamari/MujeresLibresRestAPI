@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::post('login', 'API\UserController@login');
+Route::post('register', 'API\UserController@register');
+
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::post('logout', 'API\UserController@logout');
+    Route::post('details', 'API\UserController@details');
+});
