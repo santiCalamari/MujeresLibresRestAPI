@@ -19,7 +19,7 @@ class RecuperarPassword extends Mailable {
     public function build(){
         return $this->from('mujereslibressfc@gmail.com')
     		    ->view('recover_password')
-    		    ->subject('Mujeres Libres SFC - Nueva constraseña');
+    		    ->subject('Mujeres Libres SFC - Nueva constraseÃ±a');
     }
 
 }

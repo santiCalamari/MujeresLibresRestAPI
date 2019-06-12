@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('web.layouts.mainlayout');
 });
 
 Route::get('login', function () {
-    return view('login');
+    return view('web.layouts.login');
 });
 
 Route::post('login', 'API\UserController@login');
