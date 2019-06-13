@@ -1,6 +1,5 @@
-<!doctype html
-    <html lang="{{ app()->getLocale() }}">
-<body>
+<div class="flex-center position-ref full-height">
+    {!! form($form) !!}
+</div>
 
-</body>
-</html>
+

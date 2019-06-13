@@ -2,7 +2,7 @@
     <img class="my-0 mr-md-auto font-weight-normal" src="/img/72.png">                
     <div class="flex-column">
         <a class="btn border" href="{{ url('/register') }}">Registrarse</a>
-        <a class="btn border" href="{{ url('/login') }}">Iniciar Sesión</a>
+        <a class="btn border" href="{{ url('/iniciar-sesion') }}">Iniciar Sesión</a>
     </div>
 </div>
 
