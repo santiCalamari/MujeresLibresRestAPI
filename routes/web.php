@@ -13,11 +13,8 @@
 Route::get('/', function () {
     return view('web.layouts.mainlayout');
 });
-Route::get('iniciar-sesion', 'Web\UserController@login');
-Route::get('register', function () {
-    return view('web.layouts.register');
-});
-
+Route::get('iniciar-sesion', 'Web\UserController@showlogin');
+Route::get('registrarse', 'Web\UserController@showRegister');
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
@@ -26,70 +23,70 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('details', 'API\UserController@details');
 });
 
-Route::get('indexC', 'Web\CuestionarioController@index');
-
-Route::get('showCA', 'Web\CentroAyudaController@show');
-Route::get('updateCA', 'Web\CentroAyudaController@update');
-Route::get('validarAverageGeneralCA', 'Web\CentroAyudaController@validarAverageGeneral');
-Route::get('validarVotersCA', 'Web\CentroAyudaController@validarVoters');
-
-Route::get('showO', 'Web\OpinionController@show');
-Route::get('storeO', 'Web\OpinionController@store');
-Route::get('validarNameO', 'Web\OpinionController@validarName');
-Route::get('validarAverageO', 'Web\OpinionController@validarAverage');
-Route::get('validarUserIdO', 'Web\OpinionController@validarUserId');
-Route::get('validarCentroAyudaIdO', 'Web\OpinionController@validarCentroAyudaId');
-Route::get('updateCentroAyudaO', 'Web\OpinionController@updateCentroAyuda');
-
-Route::get('indexP', 'Web\PreguntaController@index');
-Route::get('showP', 'Web\PreguntaController@show');
-
-Route::get('showR', 'Web\RolController@show');
-
-Route::get('indexD', 'Web\DigitecaController@index');
-Route::get('showD', 'Web\DigitecaController@show');
-Route::get('storeD', 'Web\DigitecaController@store');
-Route::get('updateD', 'Web\DigitecaController@update');
-Route::get('deleteD', 'Web\DigitecaController@delete');
-Route::get('validarNameD', 'Web\DigitecaController@validarName');
-Route::get('validarWebSiteD', 'Web\DigitecaController@validarWebSite');
-Route::get('agregarHttpD', 'Web\DigitecaController@agregarHttp');
-
-Route::get('showF', 'Web\FavoritoController@show');
-Route::get('storeF', 'Web\FavoritoController@store');
-Route::get('deleteF', 'Web\FavoritoController@delete');
-Route::get('validarUserIdF', 'Web\FavoritoController@validarUserId');
-Route::get('validarCentroAyudaIdF', 'Web\FavoritoController@validarCentroAyudaId');
-
-Route::get('indexN', 'Web\NoticiaController@index');
-Route::get('showN', 'Web\NoticiaController@show');
-Route::get('storeN', 'Web\NoticiaController@store');
-Route::get('updateN', 'Web\NoticiaController@update');
-Route::get('deleteN', 'Web\NoticiaController@delete');
-Route::get('validarTitleN', 'Web\NoticiaController@validarTitle');
-Route::get('validarDescriptionN', 'Web\NoticiaController@validarDescription');
-Route::get('validarDateAtN', 'Web\NoticiaController@validarDateAt');
-
-Route::get('indexNov', 'Web\NovedadController@index');
-Route::get('getAllNov', 'Web\NovedadController@getAll');
-Route::get('showNov', 'Web\NovedadController@show');
-Route::get('storeNov', 'Web\NovedadController@store');
-Route::get('updateNov', 'Web\NovedadController@update');
-Route::get('deleteNov', 'Web\NovedadController@delete');
-Route::get('validarTitleNov', 'Web\NovedadController@validarTitle');
-Route::get('validarDescriptionNov', 'Web\NovedadController@validarDescription');
-Route::get('validarDateAtNov', 'Web\NovedadController@validarDateAt');
-Route::get('validarIsNewNov', 'Web\NovedadController@validarIsNew');
-
-
-Route::get('register', 'Web\UserController@register');
-Route::get('login', 'Web\UserController@login');
-Route::get('logout', 'Web\UserController@logout');
-Route::get('details', 'Web\UserController@details');
-Route::get('changePassword', 'Web\UserController@changePassword');
-Route::get('voluntario', 'Web\UserController@voluntario');
-Route::get('actualizarUsuario', 'Web\UserController@actualizarUsuario');
-Route::get('recuperarPassword', 'Web\UserController@recuperarPassword');
+//Route::get('indexC', 'Web\CuestionarioController@index');
+//
+//Route::get('showCA', 'Web\CentroAyudaController@show');
+//Route::get('updateCA', 'Web\CentroAyudaController@update');
+//Route::get('validarAverageGeneralCA', 'Web\CentroAyudaController@validarAverageGeneral');
+//Route::get('validarVotersCA', 'Web\CentroAyudaController@validarVoters');
+//
+//Route::get('showO', 'Web\OpinionController@show');
+//Route::get('storeO', 'Web\OpinionController@store');
+//Route::get('validarNameO', 'Web\OpinionController@validarName');
+//Route::get('validarAverageO', 'Web\OpinionController@validarAverage');
+//Route::get('validarUserIdO', 'Web\OpinionController@validarUserId');
+//Route::get('validarCentroAyudaIdO', 'Web\OpinionController@validarCentroAyudaId');
+//Route::get('updateCentroAyudaO', 'Web\OpinionController@updateCentroAyuda');
+//
+//Route::get('indexP', 'Web\PreguntaController@index');
+//Route::get('showP', 'Web\PreguntaController@show');
+//
+//Route::get('showR', 'Web\RolController@show');
+//
+//Route::get('indexD', 'Web\DigitecaController@index');
+//Route::get('showD', 'Web\DigitecaController@show');
+//Route::get('storeD', 'Web\DigitecaController@store');
+//Route::get('updateD', 'Web\DigitecaController@update');
+//Route::get('deleteD', 'Web\DigitecaController@delete');
+//Route::get('validarNameD', 'Web\DigitecaController@validarName');
+//Route::get('validarWebSiteD', 'Web\DigitecaController@validarWebSite');
+//Route::get('agregarHttpD', 'Web\DigitecaController@agregarHttp');
+//
+//Route::get('showF', 'Web\FavoritoController@show');
+//Route::get('storeF', 'Web\FavoritoController@store');
+//Route::get('deleteF', 'Web\FavoritoController@delete');
+//Route::get('validarUserIdF', 'Web\FavoritoController@validarUserId');
+//Route::get('validarCentroAyudaIdF', 'Web\FavoritoController@validarCentroAyudaId');
+//
+//Route::get('indexN', 'Web\NoticiaController@index');
+//Route::get('showN', 'Web\NoticiaController@show');
+//Route::get('storeN', 'Web\NoticiaController@store');
+//Route::get('updateN', 'Web\NoticiaController@update');
+//Route::get('deleteN', 'Web\NoticiaController@delete');
+//Route::get('validarTitleN', 'Web\NoticiaController@validarTitle');
+//Route::get('validarDescriptionN', 'Web\NoticiaController@validarDescription');
+//Route::get('validarDateAtN', 'Web\NoticiaController@validarDateAt');
+//
+//Route::get('indexNov', 'Web\NovedadController@index');
+//Route::get('getAllNov', 'Web\NovedadController@getAll');
+//Route::get('showNov', 'Web\NovedadController@show');
+//Route::get('storeNov', 'Web\NovedadController@store');
+//Route::get('updateNov', 'Web\NovedadController@update');
+//Route::get('deleteNov', 'Web\NovedadController@delete');
+//Route::get('validarTitleNov', 'Web\NovedadController@validarTitle');
+//Route::get('validarDescriptionNov', 'Web\NovedadController@validarDescription');
+//Route::get('validarDateAtNov', 'Web\NovedadController@validarDateAt');
+//Route::get('validarIsNewNov', 'Web\NovedadController@validarIsNew');
+//
+//
+//Route::get('register', 'Web\UserController@register');
+//Route::get('login', 'Web\UserController@login');
+//Route::get('logout', 'Web\UserController@logout');
+//Route::get('details', 'Web\UserController@details');
+//Route::get('changePassword', 'Web\UserController@changePassword');
+//Route::get('voluntario', 'Web\UserController@voluntario');
+//Route::get('actualizarUsuario', 'Web\UserController@actualizarUsuario');
+//Route::get('recuperarPassword', 'Web\UserController@recuperarPassword');
 
 
 

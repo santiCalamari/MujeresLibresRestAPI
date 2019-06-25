@@ -7,16 +7,43 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use Illuminate\Mail\Message;
+use View;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\RecuperarPassword;
 use Kris\LaravelFormBuilder\FormBuilder;
-use App\Forms\SongForm;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
 {
 
     public $successStatus = 200;
+
+    /**
+     * Show form login web
+     *
+     */
+    public function showLogin()
+    {
+        // Verificamos que el usuario no esté autenticado
+        if (Auth::check()) {
+            // Si está autenticado lo mandamos a la raíz donde estara el mensaje de bienvenida.
+            return Redirect::to('/');
+        }
+        return View::make('web.layouts.login');
+    }
+
+    /**
+     * Show form register web
+     *
+     */
+    public function showRegister()
+    {
+        // Verificamos que el usuario no esté autenticado
+        if (Auth::check()) {
+            // Si está autenticado lo mandamos a la raíz donde estara el mensaje de bienvenida.
+            return Redirect::to('/');
+        }
+        return View::make('web.layouts.register');
+    }
 
     /**
      * Register api
@@ -25,7 +52,6 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
-        return "register";
         $validator = Validator::make($request->all(), [
                 'nickname' => 'required',
                 'password' => 'required',
@@ -50,31 +76,20 @@ class UserController extends Controller
      */
     public function login(FormBuilder $formBuilder)
     {
-        return "login";
-        if (request('nickname') == null) {
-            /// manejar errores con laravel para verlos en el template
-            return response()->json(['error' => 'Ingrese un usuario'], 401);
+        // Guardamos en un arreglo los datos del usuario.
+        $userdata = array(
+            'username' => Input::get('username'),
+            'password' => Input::get('password')
+        );
+        // Validamos los datos y además mandamos como un segundo parámetro la opción de recordar el usuario.
+        if (Auth::attempt($userdata, Input::get('remember-me', 0))) {
+            // De ser datos válidos nos mandara a la bienvenida
+            return Redirect::to('/');
         }
-        if (request('password') == null) {
-            return response()->json(['error' => 'Ingrese una contraseña'], 401);
-        }
-        $form = $formBuilder->create(\App\Forms\LoginForm::class, [
-            'method' => 'POST',
-            'url' => route('login')
-        ]);
-        if ($form->isValid()) {
-            if (Auth::attempt(['nickname' => request('nickname'), 'password' => request('password')])) {
-                $user = Auth::user();
-                $success['id'] = $user->id;
-                $success['rolId'] = $user->rol_id;
-                $success['token'] = $user->createToken('MyApp')->accessToken;
-                // todo go to menu principal
-                return view('web.layouts.menu_principal', compact('form'));
-            } else {
-                return redirect()->back()->withErrors($form->getErrors())->withInput();
-            }
-        }
-        return view('web.layouts.login', compact('form'));
+        // En caso de que la autenticación haya fallado manda un mensaje al formulario de login y también regresamos los valores enviados con withInput().
+        return Redirect::to('login')
+                ->with('mensaje_error', 'Tus datos son incorrectos')
+                ->withInput();
     }
 
     /**
@@ -84,7 +99,6 @@ class UserController extends Controller
      */
     public function logout()
     {
-        return "logout";
         $user = Auth::user();
         $user->AauthAcessToken()->delete();
         return response()->json('Sesion finalizada', 201);
@@ -97,7 +111,6 @@ class UserController extends Controller
      */
     public function details()
     {
-        return "details";
         $user = Auth::user();
         return User::where('id', $user->id)->get();
     }
@@ -109,7 +122,6 @@ class UserController extends Controller
      */
     public function changePassword(Request $request)
     {
-        return "changePassword";
         $data = $request->all();
         if ($data['newPassword'] !== $data['newPassword_c']) {
             return response()->json("Las contrasena no coinciden", 500);
@@ -136,7 +148,6 @@ class UserController extends Controller
      */
     public function voluntario()
     {
-        return "voluntario";
         //    $user = User::where('id', $user_id)->get()->toArray();
         $user = Auth::user();
         $user->es_voluntario = true;
@@ -146,14 +157,12 @@ class UserController extends Controller
 
     public function actualizarUsuario(Request $request, User $user)
     {
-        return "actualizarUsuario";
         $user->update($request->all());
         return response()->json($user, 200);
     }
 
     public function recuperarPassword(Request $request)
     {
-        return "recuperarPassword";
         $email = $request->input('email');
         $email_c = $request->input('email_c');
         if ($email != $email_c) {

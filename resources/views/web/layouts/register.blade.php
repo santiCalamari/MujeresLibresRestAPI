@@ -9,13 +9,11 @@
         @if(Session::has('mensaje_error'))
         {{ Session::get('mensaje_error') }}
         @endif
-        {{ Form::open(array('url' => '/login')) }}
+        {{ Form::open(array('url' => '/register')) }}
         {{ Form::label('usuario', 'Nombre de usuario') }}
         {{ Form::text('username', Request::old('username')) }}
         {{ Form::label('contraseña', 'Contraseña') }}
         {{ Form::password('password') }}
-        {{ Form::label('lblRememberme', 'Recordar contraseña') }}
-        {{ Form::checkbox('rememberme', true) }}
         {{ Form::submit('Enviar') }}
         {{ Form::close() }}
     </body>
