@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
   | is assigned the "api" middleware group. Enjoy building your API!
   |
  */
-
 Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
@@ -35,7 +34,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::post('novedad', 'API\NovedadController@store');
     Route::put('novedad/{novedad}', 'API\NovedadController@update');
     Route::delete('novedad/{novedad}', 'API\NovedadController@delete');
-    
+
     Route::get('noticia', 'API\NoticiaController@index');
     Route::get('noticia/{noticia}', 'API\NoticiaController@show');
     Route::post('noticia', 'API\NoticiaController@store');

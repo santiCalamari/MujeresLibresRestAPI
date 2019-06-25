@@ -25,6 +25,7 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
+        return "register";
         $validator = Validator::make($request->all(), [
                 'nickname' => 'required',
                 'password' => 'required',
@@ -49,31 +50,31 @@ class UserController extends Controller
      */
     public function login(FormBuilder $formBuilder)
     {
+        return "login";
+        if (request('nickname') == null) {
+            /// manejar errores con laravel para verlos en el template
+            return response()->json(['error' => 'Ingrese un usuario'], 401);
+        }
+        if (request('password') == null) {
+            return response()->json(['error' => 'Ingrese una contraseña'], 401);
+        }
         $form = $formBuilder->create(\App\Forms\LoginForm::class, [
             'method' => 'POST',
             'url' => route('login')
         ]);
-
         if ($form->isValid()) {
-            dd(111);
-//            return redirect()->back()->withErrors($form->getErrors())->withInput();
+            if (Auth::attempt(['nickname' => request('nickname'), 'password' => request('password')])) {
+                $user = Auth::user();
+                $success['id'] = $user->id;
+                $success['rolId'] = $user->rol_id;
+                $success['token'] = $user->createToken('MyApp')->accessToken;
+                // todo go to menu principal
+                return view('web.layouts.menu_principal', compact('form'));
+            } else {
+                return redirect()->back()->withErrors($form->getErrors())->withInput();
+            }
         }
         return view('web.layouts.login', compact('form'));
-//        if (request('nickname') == null) {
-//            return response()->json(['error' => 'Ingrese un usuario'], 401);
-//        }
-//        if (request('password') == null) {
-//            return response()->json(['error' => 'Ingrese una contraseña'], 401);
-//        }
-//        if (Auth::attempt(['nickname' => request('nickname'), 'password' => request('password')])) {
-//            $user = Auth::user();
-//            $success['id'] = $user->id;
-//            $success['rolId'] = $user->rol_id;
-//            $success['token'] = $user->createToken('MyApp')->accessToken;
-//            return response()->json($success, $this->successStatus);
-//        } else {
-//            return response()->json(['error' => 'Usuario o contraseña incorrecto.'], 401);
-//        }
     }
 
     /**
@@ -83,6 +84,7 @@ class UserController extends Controller
      */
     public function logout()
     {
+        return "logout";
         $user = Auth::user();
         $user->AauthAcessToken()->delete();
         return response()->json('Sesion finalizada', 201);
@@ -95,6 +97,7 @@ class UserController extends Controller
      */
     public function details()
     {
+        return "details";
         $user = Auth::user();
         return User::where('id', $user->id)->get();
     }
@@ -106,6 +109,7 @@ class UserController extends Controller
      */
     public function changePassword(Request $request)
     {
+        return "changePassword";
         $data = $request->all();
         if ($data['newPassword'] !== $data['newPassword_c']) {
             return response()->json("Las contrasena no coinciden", 500);
@@ -130,8 +134,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function voluntario($user_id)
+    public function voluntario()
     {
+        return "voluntario";
         //    $user = User::where('id', $user_id)->get()->toArray();
         $user = Auth::user();
         $user->es_voluntario = true;
@@ -141,12 +146,14 @@ class UserController extends Controller
 
     public function actualizarUsuario(Request $request, User $user)
     {
+        return "actualizarUsuario";
         $user->update($request->all());
         return response()->json($user, 200);
     }
 
     public function recuperarPassword(Request $request)
     {
+        return "recuperarPassword";
         $email = $request->input('email');
         $email_c = $request->input('email_c');
         if ($email != $email_c) {

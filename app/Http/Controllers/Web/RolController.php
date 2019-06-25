@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,6 +19,7 @@ class RolController extends Controller
 
     public function show(Rol $rol)
     {
+        return "showR";
         return $rol;
     }
 //    public function store(Request $request) {
