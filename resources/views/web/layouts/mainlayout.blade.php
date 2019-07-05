@@ -1,9 +1,8 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -53,16 +52,16 @@
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
             </div>
         </nav>
         <main role="main">
             <!-- Main jumbotron for a primary marketing message or call to action -->
-            <div class="jumbotron">
+            <div class="jumbotron panel-mujeres-libres">
                 <div class="container">
-                    <h1 class="display-3"> MUJERES LIBRES </h1>
-                    <p>Tu fuerza es tu libertad. Aplicación web contra las violencias de género.</p>
+                    <p class="display-3 text-center mujeres-libres"> MUJERES LIBRES </p>
+                    <p class="text-center slogan">Tu fuerza es tu libertad. Aplicación web contra las violencias de género.</p>
                 </div>
             </div>
 
@@ -72,46 +71,46 @@
                     <div class="col-md-4">
                         <h2>Centros de Ayuda</h2>
                         <p> Las personas que recorren la ruta de la denuncia, pueden registrar las instituciones a las que han acuddo y calificar la atención recibida en las mismas.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Test</h2>
                         <p> Permite realizar encuestas sobre cuestiones de género. </p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Asesorate</h2>
                         <p>Permite contactarse con el 144, 911 y el 0800 777 5000 y otros organismos especializados.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <h2>Informate</h2>
                         <p> Permite encontrar información sobre: Violencias de Género, Derechos y Recursos existentes, Educación Sexual Integral, a traves de contenidos interactivos y amigables.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Novedades</h2>
                         <p> Permite compartir eventos a nivel local. Además brinda información sobre efemérides feministas.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Encontrarte</h2>
                         <p> Permite sumarse al voluntariado Municipal sobre trata de personas y violencias de género.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <h2>Noticias</h2>
                         <p>Permite compartir noticias a nivel local, provincial, nacional e internacional. </p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-6">
                         <h2>Consultas</h2>
                         <p> Permite enviar consultas hacia el Área Mujer y Diversidad Sexual.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                 </div>
 
@@ -120,7 +119,7 @@
             </div> <!-- /container -->
 
         </main>
-    </body>>
+    </body>
     <footer class="container">
         <p>&copy; Municipalidad de Santa Fe - Universidad Nacional del Litoral</p>
     </footer>
