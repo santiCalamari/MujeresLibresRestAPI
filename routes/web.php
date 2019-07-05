@@ -13,16 +13,26 @@
 Route::get('/', function () {
     return view('web.layouts.mainlayout');
 });
+
+Route::get('menu-principal', function() {
+    return view('web.layouts.menuPrincipal');
+});
+
 Route::get('iniciar-sesion', 'Web\UserController@showlogin');
 Route::get('registrarse', 'Web\UserController@showRegister');
-Route::post('login', 'API\UserController@login');
-Route::post('register', 'API\UserController@register');
+
+//Route::post('login', 'API\UserController@login');
+//Route::post('register', 'API\UserController@register');
 
 Route::group(['middleware' => 'auth:api'], function() {
     Route::post('logout', 'API\UserController@logout');
     Route::post('details', 'API\UserController@details');
 });
 
+
+// ************************************************************* //
+// ****************  RUTAS PARA TESTS **************************//
+// *************************************************************//
 //Route::get('indexC', 'Web\CuestionarioController@index');
 //
 //Route::get('showCA', 'Web\CentroAyudaController@show');
@@ -77,7 +87,6 @@ Route::group(['middleware' => 'auth:api'], function() {
 //Route::get('validarDescriptionNov', 'Web\NovedadController@validarDescription');
 //Route::get('validarDateAtNov', 'Web\NovedadController@validarDateAt');
 //Route::get('validarIsNewNov', 'Web\NovedadController@validarIsNew');
-//
 //
 //Route::get('register', 'Web\UserController@register');
 //Route::get('login', 'Web\UserController@login');

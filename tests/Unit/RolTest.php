@@ -302,11 +302,11 @@ class RolTest extends TestCase
         $this->assertEquals("login", $response->getContent());
     }
 
-    public function test48()
-    {
-        $response = $this->call('GET', 'logout');
-        $this->assertEquals("logout", $response->getContent());
-    }
+//    public function test48()
+//    {
+//        $response = $this->call('GET', 'logout');
+//        $this->assertEquals("logout", $response->getContent());
+//    }
 
     public function test49()
     {
