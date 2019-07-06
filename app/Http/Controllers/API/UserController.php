@@ -54,7 +54,7 @@ class UserController extends Controller {
             $user = Auth::user();
             $success['id'] = $user->id;
             $success['rolId'] = $user->rol_id;
-            $success['token'] = $user->createToken('MyApp')->accessToken;           
+            $success['token'] = $user->createToken('MyApp')->accessToken;
             return response()->json($success, $this->successStatus);
         } else {
             return response()->json(['error' => 'Usuario o contraseña incorrecto.'], 401);
@@ -79,9 +79,9 @@ class UserController extends Controller {
      */
     public function details() {
         $user = Auth::user();
-        return User::where('id', $user->id)->get(); 
+        return User::where('id', $user->id)->get();
     }
-    
+
     /**
      * changePassword api
      *
@@ -99,7 +99,7 @@ class UserController extends Controller {
                 $user->AauthAcessToken()->delete();
                 $success['id'] = $user->id;
                 $success['rolId'] = $user->rol_id;
-                $success['token'] = $user->createToken('MyApp')->accessToken;   
+                $success['token'] = $user->createToken('MyApp')->accessToken;
                 $user->save();
                 return response()->json($success, $this->successStatus);
             }
@@ -113,32 +113,43 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function voluntario($user_id) {
-    //    $user = User::where('id', $user_id)->get()->toArray();
-	$user = Auth::user();
+        //    $user = User::where('id', $user_id)->get()->toArray();
+        $user = Auth::user();
         $user->es_voluntario = true;
         $user->save();
         return response()->json($user, 200);
     }
 
-    public function actualizarUsuario(Request $request, User $user){
+    public function actualizarUsuario(Request $request, User $user) {
         $user->update($request->all());
         return response()->json($user, 200);
     }
 
     public function recuperarPassword(Request $request) {
+        if ($request->input('email') == null) {
+            return response()->json(['error' => 'Ingrese un email'], 401);
+        }
+        if ($request->input('email_c') == null) {
+            return response()->json(['error' => 'Ingrese por segunda vez un email'], 401);
+        }
         $email = $request->input('email');
         $email_c = $request->input('email_c');
-	if($email != $email_c){
-		return response()->json("Los correos ingresados no coinciden", 401);
-	}
-        $password = str_random(8);
-        $user = Auth::user();
-        $user->password = bcrypt($password);
-	$user->save();
-	$obj = new \stdClass();
-	$obj->nickname = $user->nickname;
-	$obj->password = $password;	
-        Mail::to($email)->send(new recuperarPassword($obj));
-        return response()->json("Se ha enviado un correo electronico con la nueva contraseña");
+        if ($email != $email_c) {
+            return response()->json("Los correos ingresados no coinciden", 401);
+        }
+        try {
+            $password = str_random(8);
+            $user = Auth::user();
+            $user->password = bcrypt($password);
+            $user->save();
+            $obj = new \stdClass();
+            $obj->nickname = $user->nickname;
+            $obj->password = $password;
+            Mail::to($email)->send(new recuperarPassword($obj));
+            return response()->json("Se ha enviado un correo electronico con la nueva contraseña.");
+        } catch (Exception $ex) {
+            return response()->json("Hubo un erro al resetear la nueva contraseña. Intente nuevamente mas tarde!", 401);
+        }
     }
+
 }

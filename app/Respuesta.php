@@ -6,7 +6,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Novedad extends Model {
+class Respuesta extends Model {
 
     use HasApiTokens,
         Notifiable;
@@ -16,6 +16,6 @@ class Novedad extends Model {
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'date_at', 'address', 'isNew'];
+    protected $fillable = ['user_id', 'cuestionario_id', 'date_at', 'semaforo', 'c_amarillas', 'c_naranjas', 'c_rojas'];
 
 }

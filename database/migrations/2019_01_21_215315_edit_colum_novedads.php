@@ -14,7 +14,7 @@ class EditColumNovedads extends Migration
     public function up()
     {
         Schema::table('novedads', function (Blueprint $table) {
-            $table->renameColumn('titlte', 'title');
+//            $table->renameColumn('titlte', 'title');
         });
     }
 
