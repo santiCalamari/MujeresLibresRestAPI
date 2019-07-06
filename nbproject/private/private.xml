@@ -3,6 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/var/www/html/restapisfm/public/css/style.css</file>
+            <file>file:/var/www/html/restapisfm/resources/views/web/layouts/mainlayout.blade.php</file>
             <file>file:/var/www/html/restapisfm/app/Http/Controllers/API/UserController.php</file>
             <file>file:/var/www/html/restapisfm/app/Mail/RecuperarPassword.php</file>
             <file>file:/var/www/html/restapisfm/.env</file>
