@@ -6,16 +6,14 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class UserTest extends TestCase
-{
+class UserTest extends TestCase {
 
     /**
      * A show function
      *
      * @return void
      */
-    public function testShow()
-    {
+    public function testRequiereNicknameyContraseña() {
         $this->assertTrue(true);
     }
 
@@ -24,8 +22,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUpdate()
-    {
+    public function testUsuarioLogueadoExitoso() {
         $this->assertTrue(true);
     }
 
@@ -34,8 +31,7 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testValidarAverageGeneral()
-    {
+    public function testsRegistroExitoso() {
         $this->assertTrue(true);
     }
 
@@ -44,8 +40,35 @@ class UserTest extends TestCase
      *
      * @return validarVoters
      */
-    public function testValidarVoters()
-    {
+    public function testsRequierePasswordEmailYName() {
         $this->assertTrue(true);
     }
+
+    /**
+     * A update function
+     *
+     * @return validarVoters
+     */
+    public function testsRequiereConfirmacionPassword() {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * A update function
+     *
+     * @return validarVoters
+     */
+    public function testUsuarioCerrarSesionExitoso() {
+        $this->assertTrue(true);
+    }
+
+    /**
+     * A update function
+     *
+     * @return validarVoters
+     */
+    public function testUsuarioTokenNulo() {
+        $this->assertTrue(true);
+    }
+
 }

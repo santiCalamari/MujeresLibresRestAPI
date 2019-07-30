@@ -1,4 +1,5 @@
 <?php
+
 /*
   |--------------------------------------------------------------------------
   | Web Routes
@@ -14,20 +15,24 @@ Route::get('/', function () {
     return view('web.layouts.mainlayout');
 });
 
-Route::get('menu-principal', function() {
-    return view('web.layouts.menuPrincipal');
+Route::get('iniciar-sesion', ['as' => 'iniciar-sesion', 'uses' => 'Web\UserController@showlogin']);
+Route::get('registrarse', ['as' => 'registrarse', 'uses' => 'Web\UserController@showRegister']);
+
+Route::post('login', 'Web\UserController@login');
+Route::post('register', 'Web\UserController@register');
+
+Route::group(array('before' => 'auth'), function() {
+    Route::get('/', function() {
+        return view('web.layouts.mainlayout');
+    });
+    Route::get('cerrar-sesion', ['as' => 'cerrar-sesion', 'uses' => 'Web\UserController@logOut']);
+    
+    Route::get('novedades', ['as' => 'novedades', 'uses' => 'Web\NovedadController@getAll']);
+    Route::get('agregar-novedad', ['as' => 'agregar-novedad', 'uses' => 'Web\NovedadController@agregar']);
+    Route::get('editar-novedad', ['as' => 'editar-novedad', 'uses' => 'Web\NovedadController@editar']);
+    Route::get('eliminar-novedad', ['as' => 'eliminar-novedad0', 'uses' => 'Web\NovedadController@eliminar']);
 });
 
-Route::get('iniciar-sesion', 'Web\UserController@showlogin');
-Route::get('registrarse', 'Web\UserController@showRegister');
-
-//Route::post('login', 'API\UserController@login');
-//Route::post('register', 'API\UserController@register');
-
-Route::group(['middleware' => 'auth:api'], function() {
-    Route::post('logout', 'API\UserController@logout');
-    Route::post('details', 'API\UserController@details');
-});
 
 
 // ************************************************************* //

@@ -178,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         
         Laravel\Passport\PassportServiceProvider::class,
-        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,      
+        Collective\Html\HtmlServiceProvider::class
     ],
 
     /*
@@ -228,7 +229,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
-
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class
     ],
 
 ];
