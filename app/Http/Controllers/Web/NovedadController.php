@@ -12,7 +12,7 @@ class NovedadController extends Controller {
 
     public $successStatus = 200;
 
-    public function getAll() {
+    public function getAll() { 
         $novedades = DB::table('novedads')->where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
         dd($novedades);
         return $novedad;
