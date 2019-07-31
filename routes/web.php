@@ -1,5 +1,4 @@
 <?php
-
 /*
   |--------------------------------------------------------------------------
   | Web Routes
@@ -21,13 +20,13 @@ Route::get('registrarse', ['as' => 'registrarse', 'uses' => 'Web\UserController@
 Route::post('login', 'Web\UserController@login');
 Route::post('register', 'Web\UserController@register');
 
+Route::get('novedades', ['as' => 'novedades', 'uses' => 'Web\NovedadController@getAll']);
+
+Route::get('noticias', ['as' => 'noticias', 'uses' => 'Web\NoticiaController@getAll']);
+
 Route::group(array('before' => 'auth'), function() {
-    Route::get('/', function() {
-        return view('web.layouts.mainlayout');
-    });
     Route::get('cerrar-sesion', ['as' => 'cerrar-sesion', 'uses' => 'Web\UserController@logOut']);
-    
-    Route::get('novedades', ['as' => 'novedades', 'uses' => 'Web\NovedadController@getAll']);
+
     Route::get('agregar-novedad', ['as' => 'agregar-novedad', 'uses' => 'Web\NovedadController@agregar']);
     Route::get('editar-novedad', ['as' => 'editar-novedad', 'uses' => 'Web\NovedadController@editar']);
     Route::get('eliminar-novedad', ['as' => 'eliminar-novedad0', 'uses' => 'Web\NovedadController@eliminar']);

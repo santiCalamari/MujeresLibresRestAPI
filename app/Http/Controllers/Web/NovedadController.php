@@ -1,36 +1,56 @@
 <?php
-
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Novedad;
+use View;
 use Illuminate\Support\Facades\DB;
 
+class NovedadController extends Controller
+{
 
-class NovedadController extends Controller {
+    public function getAll()
+    {
+        // The columns variable is used for sorting
+        $columns = array(
+            // datatable column index => database column name
+            0 => 'title',
+            1 => 'date_at',
+            2 => 'description',
+        );
 
-    public $successStatus = 200;
-
-    public function getAll() { 
         $novedades = DB::table('novedads')->where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
-        dd($novedades);
-        return $novedad;
+        $totalData = $novedades->count();
+
+        $data = array();
+        foreach ($novedades as $novedad) {
+            $nestedData = array();
+            $nestedData [0] = $novedad->title;
+            $nestedData [1] = $novedad->date_at;
+            $nestedData [2] = $novedad->description;
+            $data [] = $nestedData;
+        }
+        return view('web.layouts.novedades', compact('data'));
     }
 
-    public function agregar(Novedad $novedad) {
+    public function agregar(Novedad $novedad)
+    {
         
     }
 
-    public function editar(Request $request) {
+    public function editar(Request $request)
+    {
         
     }
 
-    public function eliminar(Request $request, Novedad $novedad) {
+    public function eliminar(Request $request, Novedad $novedad)
+    {
         
     }
 
-    public function validarTitle(Request $request) {
+    public function validarTitle(Request $request)
+    {
         return "validarTitleNov";
         $title = $request->input('titlte');
         if (!$title || !isset($title)) {
@@ -39,7 +59,8 @@ class NovedadController extends Controller {
         return true;
     }
 
-    public function validarDescription(Request $request) {
+    public function validarDescription(Request $request)
+    {
         return "validarDescriptionNov";
         $description = $request->input('description');
         if (!$description || !isset($description)) {
@@ -48,7 +69,8 @@ class NovedadController extends Controller {
         return true;
     }
 
-    public function validarDateAt(Request $request) {
+    public function validarDateAt(Request $request)
+    {
         return "validarDateAtNov";
         $date_at = $request->input('date_at');
         if (!$date_at || !isset($date_at)) {
@@ -57,7 +79,8 @@ class NovedadController extends Controller {
         return true;
     }
 
-    public function validarIsNew(Request $request) {
+    public function validarIsNew(Request $request)
+    {
         return "validarIsNewNov";
         $isNew = $request->input('isNew');
         if (!isset($isNew)) {
@@ -65,5 +88,4 @@ class NovedadController extends Controller {
         }
         return true;
     }
-
 }
