@@ -1,82 +1,16 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-        <meta name="generator" content="Jekyll v3.8.5">
-        <title>Mujeres Libres</title>
-
-        <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
-
-        <!-- Bootstrap core CSS -->
-        <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-        <style>
-            .bd-placeholder-img {
-                font-size: 1.125rem;
-                text-anchor: middle;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-
-            @media (min-width: 768px) {
-                .bd-placeholder-img-lg {
-                    font-size: 3.5rem;
-                }
-            }
-        </style>
-        <!-- Custom styles for this template -->
-        <link href="jumbotron.css" rel="stylesheet">
-    </head>
+    @include('web.partials.head') 
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="#">Mujeres Libres</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    @if (Auth::check())
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Mi perfil<span class="sr-only">(current) </span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('cerrar-sesion') }}">Salir</a>
-                    </li>      
-                    @else
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('iniciar-sesion') }}">Iniciar Sesión <span class="sr-only">(current) </span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Registrarse</a>
-                    </li>      
-                    @endif
-
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-            </div>
-        </nav>
+        @include('web.partials.nav') 
         <main role="main">
-            <!-- Main jumbotron for a primary marketing message or call to action -->
             <div class="jumbotron panel-mujeres-libres">
                 <div class="container">
                     <p class="display-3 text-center mujeres-libres"> MUJERES LIBRES </p>
                     <p class="text-center slogan">Tu fuerza es tu libertad. Aplicación web contra las violencias de género.</p>
                 </div>
             </div>
-
             <div class="container">
-                <!-- Example row of columns -->
                 <div class="row">
                     <div class="col-md-4">
                         <h2>Centros de Ayuda</h2>
@@ -103,9 +37,7 @@
                     <div class="col-md-4">
                         <h2>Novedades</h2>
                         <p> Permite compartir eventos a nivel local. Además brinda información sobre efemérides feministas.</p>
-                        <!--<p><a class="btn btn-secondary" href="{{ route('novedades') }}" role="button">Ver más &raquo;</a></p>-->
-                        <p><a class="btn btn-secondary" href="{{ action('Web\NovedadController@getAll') }}" role="button">Ver más &raquo;</a></p>
-
+                        <p><a class="btn btn-secondary" href="{{ route('listado-novedades') }}" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Encontrarte</h2>

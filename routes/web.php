@@ -20,7 +20,7 @@ Route::get('registrarse', ['as' => 'registrarse', 'uses' => 'Web\UserController@
 Route::post('login', 'Web\UserController@login');
 Route::post('register', 'Web\UserController@register');
 
-Route::get('novedades', ['as' => 'novedades', 'uses' => 'Web\NovedadController@getAll']);
+Route::get('listado-novedades', ['as' => 'listado-novedades', 'uses' => 'Web\NovedadController@getAll']);
 
 Route::get('noticias', ['as' => 'noticias', 'uses' => 'Web\NoticiaController@getAll']);
 

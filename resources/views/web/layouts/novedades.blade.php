@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel DataTables Tutorial Example</title>
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
-    </head>
+    @include('web.partials.head') 
+    @include('web.partials.nav')
     <body>
-        <div class="container">
-            <br/>
-            <h1 class="text-center">Novedades - Eventos y Efemerides</h1>
-            <br/>
-            <table class="table table-bordered" id="novedades-table">
-                <thead>
-                    <tr>
-                        <th>Titulo</th>
-                        <th>Dia</th>
-                        <th>Descripcion</th>                        
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <script src="//code.jquery.com/jquery.js"></script>
-        <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script>
-        $(function() {
-            $('#novedades-table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('get.data') !!}',
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'name', name: 'name' },
-                    { data: 'email', name: 'email' },
-                ]
-            });
-        });
-        </script>
-        @stack('scripts')
+        <main role="main">
+            <div class="col-12">
+                <div class="jumbotron panel-mujeres-libres">
+                    <div class="container">
+                        <p class="display-4 text-center mujeres-libres"> Novedades - Eventos y efemerides </p>
+                    </div>
+                </div>
+                <table id="novedades" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Dia</th>
+                            <th>Titulo</th>
+                            <th>Opciones</th>                            
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Dia</th>
+                            <th>Titulo</th>
+                            <th>Opciones</th>  
+                        </tr>
+                    </tfoot>
+                </table>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        var table = $('#novedades').DataTable({
+                            dom: "Bfrtip",
+                            columns: [
+                                {
+                                    className: 'details-control',
+                                    orderable: false,
+                                    data: null,
+                                    defaultContent: ''
+                                },
+                                {data: "date_at"},
+                                {data: "description"},
+                            ],
+                            order: [[1, 'asc']],
+                            select: true,
+                            buttons: [
+                                {extend: "create", editor: editor}
+                            ],
+                            rowCallback: function (row, data, index) {
+                                $('td:first-child', row).attr('title', 'Click to edit');
+                            }
+                        });
+                    });
+                </script>
+            </div>
+        </main>
     </body>
 </html>

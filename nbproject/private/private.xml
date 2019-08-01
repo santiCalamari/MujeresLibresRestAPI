@@ -5,7 +5,8 @@
         <group>
             <file>file:/var/www/html/restapisfm/routes/web.php</file>
             <file>file:/var/www/html/restapisfm/app/Http/Controllers/Web/NovedadController.php</file>
-            <file>file:/var/www/html/restapisfm/resources/views/web/layouts/listado_novedades.blade.php</file>
+            <file>file:/var/www/html/restapisfm/resources/views/web/layouts/mainlayout.blade.php</file>
+            <file>file:/var/www/html/restapisfm/resources/views/web/layouts/novedades.blade.php</file>
         </group>
     </open-files>
 </project-private>

@@ -12,24 +12,14 @@ class NovedadController extends Controller
 
     public function getAll()
     {
-        // The columns variable is used for sorting
-        $columns = array(
-            // datatable column index => database column name
-            0 => 'title',
-            1 => 'date_at',
-            2 => 'description',
-        );
-
         $novedades = DB::table('novedads')->where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
         $totalData = $novedades->count();
-
         $data = array();
         foreach ($novedades as $novedad) {
             $nestedData = array();
-            $nestedData [0] = $novedad->title;
-            $nestedData [1] = $novedad->date_at;
-            $nestedData [2] = $novedad->description;
-            $data [] = $nestedData;
+            $nestedData['title'] = $novedad->title;
+            $nestedData['date_at'] = $novedad->date_at;
+            $data[] = $nestedData;
         }
         return view('web.layouts.novedades', compact('data'));
     }
