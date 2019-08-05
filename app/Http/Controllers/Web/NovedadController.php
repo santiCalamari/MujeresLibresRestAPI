@@ -6,32 +6,26 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Novedad;
 use View;
+use Illuminate\Support\Facades\DB;
 
 class NovedadController extends Controller
 {
 
     public function getAll()
     {
-        // The columns variable is used for sorting
-        $columns = array(
-            // datatable column index => database column name
-            0 => 'title',
-            1 => 'date_at',
-            2 => 'description',
-        );
+//        $novedades = DB::table('novedads')->where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
+//        $totalData = $novedades->count();
+//        $data = array();
+//        foreach ($novedades as $novedad) {
+//            $nestedData = array();
+//            $nestedData['title'] = $novedad->title;
+//            $nestedData['date_at'] = $novedad->date_at;
+//            $data[] = $nestedData;
+//        }
+        
+//        https://laravel.com/docs/4.2/pagination
 
-        $novedades = DB::table('novedads')->where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
-        $totalData = $novedades->count();
-
-        $data = array();
-        foreach ($novedades as $novedad) {
-            $nestedData = array();
-            $nestedData [0] = $novedad->title;
-            $nestedData [1] = $novedad->date_at;
-            $nestedData [2] = $novedad->description;
-            $data [] = $nestedData;
-        }
-        return View::make('web.layouts.novedades');
+        return view('web.layouts.novedades', compact('novedades'));
     }
 
     public function agregar(Novedad $novedad)
