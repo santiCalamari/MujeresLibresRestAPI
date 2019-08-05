@@ -7,10 +7,8 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Validator;
 use View;
 use Illuminate\Support\Facades\Mail;
-use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller {

@@ -103,7 +103,7 @@
                     <div class="col-md-4">
                         <h2>Novedades</h2>
                         <p> Permite compartir eventos a nivel local. Además brinda información sobre efemérides feministas.</p>
-                        <p><a class="btn btn-secondary" href="{{ route('novedades') }}" role="button">Ver más &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="{{ route('listado-novedades') }}" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Encontrarte</h2>
