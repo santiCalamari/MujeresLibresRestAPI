@@ -36,6 +36,7 @@
                                     orderable: false,
                                     data: null,
                                     defaultContent: ''
+                                    
                                 },
                                 {data: "date_at"},
                                 {data: "description"},
