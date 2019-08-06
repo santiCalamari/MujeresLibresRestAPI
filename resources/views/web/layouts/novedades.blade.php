@@ -61,7 +61,7 @@
                         @endforeach
                     </tbody>
                 </table> 
-                <!--{{$novedades->links("pagination::bootstrap-4")}}-->
+                {{$novedades->links("pagination::bootstrap-4")}}
             </div>
         </div>
     </main>   
