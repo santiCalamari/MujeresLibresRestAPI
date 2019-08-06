@@ -26,3 +26,13 @@ and open the template in the editor.
 .btn-secondary{
     background: #554063 !important;
 }
+
+.page-item.active .page-link{
+    background: #554063 !important;
+    border-color: #554063 !important;
+    color:  #ffffff !important;
+}
+
+.page-link{
+    color: #554063 !important;
+}

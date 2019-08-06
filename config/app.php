@@ -179,8 +179,7 @@ return [
         
         Laravel\Passport\PassportServiceProvider::class,
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,      
-        Collective\Html\HtmlServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class
     ],
 
     /*

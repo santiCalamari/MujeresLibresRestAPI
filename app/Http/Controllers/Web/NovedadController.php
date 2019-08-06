@@ -12,16 +12,8 @@ class NovedadController extends Controller
 
     public function getAll()
     {
-        $novedades = DB::table('novedads')->where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
-        $totalData = $novedades->count();
-        $data = array();
-        foreach ($novedades as $novedad) {
-            $nestedData = array();
-            $nestedData['title'] = $novedad->title;
-            $nestedData['date_at'] = $novedad->date_at;
-            $data[] = $nestedData;
-        }
-        return view('web.layouts.novedades', compact('data'));
+        $novedades = Novedad::where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->paginate(10);
+        return view('web.layouts.novedades', compact('novedades'));
     }
 
     public function agregar(Novedad $novedad)
