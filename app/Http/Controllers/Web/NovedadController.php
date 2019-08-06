@@ -6,31 +6,47 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Novedad;
 use View;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class NovedadController extends Controller
 {
 
     public function getAll()
     {
-//        $novedades = DB::table('novedads')->where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
-//        $totalData = $novedades->count();
-//        $data = array();
-//        foreach ($novedades as $novedad) {
-//            $nestedData = array();
-//            $nestedData['title'] = $novedad->title;
-//            $nestedData['date_at'] = $novedad->date_at;
-//            $data[] = $nestedData;
-//        }
-        
-//        https://laravel.com/docs/4.2/pagination
+//        $novedades = Novedad::where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->paginate(10);
 
+        $novedad['date_at'] = "2019-08-06";
+        $novedad['title'] = "una descrpcion";
+        $novedades[] = $novedad;
+        $novedades[] = $novedad;
+        $novedades[] = $novedad;
+        $novedades[] = $novedad;
+        $novedades[] = $novedad;
+        $novedades[] = $novedad;
+        $novedades[] = $novedad;
+        $novedades[] = $novedad;
         return view('web.layouts.novedades', compact('novedades'));
     }
 
-    public function agregar(Novedad $novedad)
+    public function agregarEvento()
     {
-        
+//todo cambiar de lugar
+        return View::make('web.layouts.agregar-evento');
+        if (Auth::check()) {
+            return View::make('web.layouts.agregar-evento');
+        }
+        return Redirect::to('/');
+    }
+
+    public function agregarEfemeride()
+    {
+//todo cambiar de lugar        
+        return View::make('web.layouts.agregar-efemeride');
+        if (Auth::check()) {
+            
+        }
+        return Redirect::to('/');
     }
 
     public function editar(Request $request)

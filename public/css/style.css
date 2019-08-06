@@ -26,3 +26,65 @@ and open the template in the editor.
 .btn-secondary{
     background: #554063 !important;
 }
+
+.page-item.active .page-link{
+    background: #554063 !important;
+    border-color: #554063 !important;
+    color:  #ffffff !important;
+}
+
+.page-link{
+    color: #554063 !important;
+}
+
+.text-info{
+    color: #ffffff !important;
+}
+
+.btn-info{
+    background: #ffffff !important;
+    border-color: #ffffff !important;
+    color:  #554063 !important;
+}
+
+#login .container #login-row #login-column #login-box {
+    margin-top: 10px;
+    max-width: 600px;
+    height: 250px;
+    border: 1px solid #9C9C9C;
+    background-color: #554063;
+}
+#login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -2px;
+}
+
+#evento .container #evento-row #evento-column #evento-box {
+    margin-top: 10px;
+    max-width: 800px;
+    height: 400px;
+    border: 1px solid #9C9C9C;
+    background-color: #554063;
+}
+#evento .container #evento-row #evento-column #evento-box #evento-form {
+    padding: 20px;
+}
+#evento .container #evento-row #evento-column #evento-box #evento-form #register-link {
+    margin-top: -2px;
+}
+
+#efemeride .container #efemeride-row #efemeride-column #efemeride-box {
+    margin-top: 10px;
+    max-width: 800px;
+    height: 200px;
+    border: 1px solid #9C9C9C;
+    background-color: #554063;
+}
+#efemeride .container #efemeride-row #efemeride-column #efemeride-box #efemeride-form {
+    padding: 20px;
+}
+#efemeride .container #efemeride-row #efemeride-column #efemeride-box #efemeride-form #register-link {
+    margin-top: -2px;
+}
