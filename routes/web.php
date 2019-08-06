@@ -25,15 +25,11 @@ Route::get('listado-novedades', ['as' => 'listado-novedades', 'uses' => 'Web\Nov
 
 Route::get('noticias', ['as' => 'noticias', 'uses' => 'Web\NoticiaController@getAll']);
 
-//todo cambiar de lugar
-Route::get('agregar-efemeride', ['as' => 'agregar-efemeride', 'uses' => 'Web\NovedadController@agregarEfemeride']);
-Route::get('agregar-evento', ['as' => 'agregar-evento', 'uses' => 'Web\NovedadController@agregarEvento']);
-
 Route::group(array('before' => 'auth'), function() {
     Route::get('cerrar-sesion', ['as' => 'cerrar-sesion', 'uses' => 'Web\UserController@logOut']);
 
-//    Route::get('agregar-evento', ['as' => 'agregar-evento', 'uses' => 'Web\NovedadController@agregarEvento']);
-//    Route::get('agregar-efemeride', ['as' => 'agregar-efemeride', 'uses' => 'Web\NovedadController@agregarEfemeride']);
+    Route::get('agregar-evento', ['as' => 'agregar-evento', 'uses' => 'Web\NovedadController@agregarEvento']);
+    Route::get('agregar-efemeride', ['as' => 'agregar-efemeride', 'uses' => 'Web\NovedadController@agregarEfemeride']);
     Route::get('editar-novedad', ['as' => 'editar-novedad', 'uses' => 'Web\NovedadController@editar']);
     Route::get('eliminar-novedad', ['as' => 'eliminar-novedad0', 'uses' => 'Web\NovedadController@eliminar']);
 });

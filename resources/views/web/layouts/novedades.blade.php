@@ -13,9 +13,6 @@
             </div>
             <div class="col-12">
                 <div class="row">
-                    <!--todo cambiar de lugar-->
-                    <a class="btn btn-secondary" href="{{ route('agregar-efemeride') }}" role="button">Agregar efeméride</a>
-                    <a class="btn btn-secondary" href="{{ route('agregar-evento') }}" role="button">Agregar evento</a>
                     @if (Auth::check())
                     <div class="col-9">
                         <input class="form-control" id="filtarNovedades" type="text" placeholder="Ingrese una fecha o una descripción">

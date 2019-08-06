@@ -14,25 +14,12 @@ class NovedadController extends Controller
 
     public function getAll()
     {
-//        $novedades = Novedad::where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->paginate(10);
-
-        $novedad['date_at'] = "2019-08-06";
-        $novedad['title'] = "una descrpcion";
-        $novedades[] = $novedad;
-        $novedades[] = $novedad;
-        $novedades[] = $novedad;
-        $novedades[] = $novedad;
-        $novedades[] = $novedad;
-        $novedades[] = $novedad;
-        $novedades[] = $novedad;
-        $novedades[] = $novedad;
+        $novedades = Novedad::where('isNew', false)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->paginate(10);
         return view('web.layouts.novedades', compact('novedades'));
     }
 
     public function agregarEvento()
     {
-//todo cambiar de lugar
-        return View::make('web.layouts.agregar-evento');
         if (Auth::check()) {
             return View::make('web.layouts.agregar-evento');
         }
@@ -41,10 +28,8 @@ class NovedadController extends Controller
 
     public function agregarEfemeride()
     {
-//todo cambiar de lugar        
-        return View::make('web.layouts.agregar-efemeride');
         if (Auth::check()) {
-            
+            return View::make('web.layouts.agregar-efemeride');
         }
         return Redirect::to('/');
     }
