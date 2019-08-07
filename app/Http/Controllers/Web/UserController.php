@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
@@ -11,13 +10,15 @@ use View;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Input;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
 
     /**
      * Show form login web
      *
      */
-    public function showLogin() {
+    public function showLogin()
+    {
         if (Auth::check()) {
             return Redirect::to('/');
         }
@@ -28,7 +29,8 @@ class UserController extends Controller {
      * Show form register web
      *
      */
-    public function showRegister() {
+    public function showRegister()
+    {
         if (Auth::check()) {
             return Redirect::to('/');
         }
@@ -40,7 +42,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
 //        $validator = Validator::make($request->all(), [
 //                    'nickname' => 'required',
 //                    'password' => 'required',
@@ -62,20 +65,20 @@ class UserController extends Controller {
      * login web
      *
      */
-    public function login() {
+    public function login()
+    {
         $userdata = array(
             'nickname' => Input::get('username'), //scalamari2
             'password' => Input::get('password')  //yipKeFmc
         );
-
         if (Auth::attempt($userdata, Input::get('remember-me', 0))) {
             // De ser datos válidos nos mandara a la bienvenida
             return Redirect::to('/');
         }
         // En caso de que la autenticación haya fallado manda un mensaje al formulario de login y también regresamos los valores enviados con withInput().
         return Redirect::to('iniciar-sesion')
-                        ->with('mensaje_error', 'Tus datos son incorrectos')
-                        ->withInput();
+                ->with('mensaje_error', 'Tus datos son incorrectos')
+                ->withInput();
     }
 
     /**
@@ -83,10 +86,11 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         return Redirect::to('/')
-                        ->with('mensaje_error', 'Tu sesión ha sido cerrada.');
+                ->with('mensaje_error', 'Tu sesión ha sido cerrada.');
     }
 
     /**
@@ -94,7 +98,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function details() {
+    public function details()
+    {
         $user = Auth::user();
         return User::where('id', $user->id)->get();
     }
@@ -104,7 +109,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function changePassword(Request $request) {
+    public function changePassword(Request $request)
+    {
         $data = $request->all();
         if ($data['newPassword'] !== $data['newPassword_c']) {
             return response()->json("Las contrasena no coinciden", 500);
@@ -129,7 +135,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function voluntario() {
+    public function voluntario()
+    {
         //    $user = User::where('id', $user_id)->get()->toArray();
         $user = Auth::user();
         $user->es_voluntario = true;
@@ -137,12 +144,14 @@ class UserController extends Controller {
         return response()->json($user, 200);
     }
 
-    public function actualizarUsuario(Request $request, User $user) {
+    public function actualizarUsuario(Request $request, User $user)
+    {
         $user->update($request->all());
         return response()->json($user, 200);
     }
 
-    public function recuperarPassword(Request $request) {
+    public function recuperarPassword(Request $request)
+    {
         $email = $request->input('email');
         $email_c = $request->input('email_c');
         if ($email != $email_c) {
@@ -158,5 +167,4 @@ class UserController extends Controller {
         Mail::to($email)->send(new recuperarPassword($obj));
         return response()->json("Se ha enviado un correo electronico con la nueva contraseña");
     }
-
 }

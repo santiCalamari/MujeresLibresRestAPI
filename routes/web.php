@@ -12,8 +12,7 @@
 
 Route::get('/', function () {
     return view('web.layouts.mainlayout');
-})->name('Inicio');
-;
+})->name('inicio');
 
 Route::get('iniciar-sesion', ['as' => 'iniciar-sesion', 'uses' => 'Web\UserController@showlogin']);
 Route::get('registrarse', ['as' => 'registrarse', 'uses' => 'Web\UserController@showRegister']);
