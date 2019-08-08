@@ -21,16 +21,27 @@ Route::post('login', 'Web\UserController@login');
 Route::post('register', 'Web\UserController@register');
 
 Route::get('listado-novedades', ['as' => 'listado-novedades', 'uses' => 'Web\NovedadController@getAll']);
+Route::get('listado-noticias', ['as' => 'listado-noticias', 'uses' => 'Web\NoticiaController@getAll']);
 
-Route::get('noticias', ['as' => 'noticias', 'uses' => 'Web\NoticiaController@getAll']);
+Route::get('ver-evento/{id}', ['as' => 'ver-evento', 'uses' => 'Web\NovedadController@verEvento']);
+Route::get('Ver-efemeride/{id}', ['as' => 'ver-efemeride', 'uses' => 'Web\NovedadController@verEfemeride']);
 
 Route::group(array('before' => 'auth'), function() {
     Route::get('cerrar-sesion', ['as' => 'cerrar-sesion', 'uses' => 'Web\UserController@logOut']);
 
-    Route::get('agregar-evento', ['as' => 'agregar-evento', 'uses' => 'Web\NovedadController@agregarEvento']);
-    Route::get('agregar-efemeride', ['as' => 'agregar-efemeride', 'uses' => 'Web\NovedadController@agregarEfemeride']);
-    Route::get('editar-novedad', ['as' => 'editar-novedad', 'uses' => 'Web\NovedadController@editar']);
-    Route::get('eliminar-novedad', ['as' => 'eliminar-novedad0', 'uses' => 'Web\NovedadController@eliminar']);
+    Route::get('agregar-evento', ['as' => 'agregar-evento', 'uses' => 'Web\NovedadController@showAgregarEvento']);
+    Route::post('add-evento', 'Web\NovedadController@agregarEvento');
+
+    Route::get('agregar-efemeride', ['as' => 'agregar-efemeride', 'uses' => 'Web\NovedadController@showAgregarEfemeride']);
+    Route::post('add-efemeride', 'Web\NovedadController@agregarEfemeride');
+
+    Route::get('editar-evento/{id}', ['as' => 'editar-evento', 'uses' => 'Web\NovedadController@showEditarEvento']);
+    Route::patch('edit-evento/{id}', ['as' => 'edit-evento', 'uses' => 'Web\NovedadController@editarEvento']);
+
+    Route::get('editar-efemeride/{id}', ['as' => 'editar-efemeride', 'uses' => 'Web\NovedadController@showEditarEfemeride']);
+    Route::patch('edit-efemeride/{id}', ['as' => 'edit-efemeride', 'uses' => 'Web\NovedadController@editarEfemeride']);
+
+    Route::delete('eliminar-novedad/{id}', ['as' => 'eliminar-novedad', 'uses' => 'Web\NovedadController@eliminar']);
 });
 
 

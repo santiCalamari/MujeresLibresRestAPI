@@ -88,3 +88,7 @@ and open the template in the editor.
 #efemeride .container #efemeride-row #efemeride-column #efemeride-box #efemeride-form #register-link {
     margin-top: -2px;
 }
+
+.error{
+    color: red !important;
+}
