@@ -49,7 +49,7 @@
                     <div class="col-md-6">
                         <h2>Noticias</h2>
                         <p>Permite compartir noticias a nivel local, provincial, nacional e internacional. </p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="{{ route('listado-noticias') }}" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-6">
                         <h2>Consultas</h2>
