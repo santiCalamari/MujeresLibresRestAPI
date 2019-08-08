@@ -25,6 +25,7 @@ Route::get('listado-noticias', ['as' => 'listado-noticias', 'uses' => 'Web\Notic
 
 Route::get('ver-evento/{id}', ['as' => 'ver-evento', 'uses' => 'Web\NovedadController@verEvento']);
 Route::get('Ver-efemeride/{id}', ['as' => 'ver-efemeride', 'uses' => 'Web\NovedadController@verEfemeride']);
+Route::get('Ver-noticia/{id}', ['as' => 'ver-noticia', 'uses' => 'Web\NoticiaController@verNoticia']);
 
 Route::group(array('before' => 'auth'), function() {
     Route::get('cerrar-sesion', ['as' => 'cerrar-sesion', 'uses' => 'Web\UserController@logOut']);
@@ -35,13 +36,20 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('agregar-efemeride', ['as' => 'agregar-efemeride', 'uses' => 'Web\NovedadController@showAgregarEfemeride']);
     Route::post('add-efemeride', 'Web\NovedadController@agregarEfemeride');
 
+    Route::get('agregar-noticia', ['as' => 'agregar-noticia', 'uses' => 'Web\NoticiaController@showAgregarNoticia']);
+    Route::post('add-noticia', 'Web\NoticiaController@agregarNoticia');
+
     Route::get('editar-evento/{id}', ['as' => 'editar-evento', 'uses' => 'Web\NovedadController@showEditarEvento']);
     Route::patch('edit-evento/{id}', ['as' => 'edit-evento', 'uses' => 'Web\NovedadController@editarEvento']);
 
     Route::get('editar-efemeride/{id}', ['as' => 'editar-efemeride', 'uses' => 'Web\NovedadController@showEditarEfemeride']);
     Route::patch('edit-efemeride/{id}', ['as' => 'edit-efemeride', 'uses' => 'Web\NovedadController@editarEfemeride']);
+    
+    Route::get('editar-noticia/{id}', ['as' => 'editar-noticia', 'uses' => 'Web\NoticiaController@showEditarNoticia']);
+    Route::patch('edit-noticia/{id}', ['as' => 'edit-noticia', 'uses' => 'Web\NoticiaController@editarNoticia']);
 
     Route::delete('eliminar-novedad/{id}', ['as' => 'eliminar-novedad', 'uses' => 'Web\NovedadController@eliminar']);
+    Route::delete('eliminar-noticidad/{id}', ['as' => 'eliminar-noticia', 'uses' => 'Web\NoticiaController@eliminar']);
 });
 
 
