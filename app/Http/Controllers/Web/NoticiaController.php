@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Noticia;
+use View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 
 class NoticiaController extends Controller
 {
@@ -28,7 +31,6 @@ class NoticiaController extends Controller
         $noticiadata = array(
             'title' => Input::get('title'),
             'date_at' => Input::get('date_at'),
-            'address' => Input::get('address'),
             'description' => Input::get('description')
         );
 
@@ -114,7 +116,7 @@ class NoticiaController extends Controller
 
     public function eliminar($id)
     {
-        $noticia = Noticias::find($id);
+        $noticia = Noticia::find($id);
         $noticia->delete();
         return Redirect::to('listado-noticias');
     }

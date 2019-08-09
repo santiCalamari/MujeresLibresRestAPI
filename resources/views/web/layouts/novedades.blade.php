@@ -7,6 +7,7 @@
             <div class="col-12">
                 <div class="jumbotron panel-mujeres-libres">
                     <div class="container">
+                        <br>
                         <p class="display-4 text-center mujeres-libres"> Novedades - Eventos y efemérides </p>
                     </div>
                 </div>

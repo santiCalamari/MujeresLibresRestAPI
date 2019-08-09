@@ -92,7 +92,11 @@ and open the template in the editor.
 #noticia .container #noticia-row #noticia-column #noticia-box {
     margin-top: 10px;
     max-width: 800px;
+<<<<<<< HEAD
     height: 400px;
+=======
+    height: 350px;
+>>>>>>> 79fe6d6e583aee9e3fd06f0fe5189507f685a6bb
     border: 1px solid #9C9C9C;
     background-color: #554063;
 }

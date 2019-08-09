@@ -23,15 +23,11 @@
                                     <input class="form-control" name="date_at" type="date" value="{{$noticia->date_at}}" id="date_at" disabled="disabled">
                                 </div>
                                 <div class="form-group">
-                                    <label for="address" class="text-info">Lugar/Direcci&oacute;n</label>
-                                    <input class="form-control" name="address" type="text" value="{{$noticia->address}}" id="address" disabled="disabled">
-                                </div>
-                                <div class="form-group">
                                     <label for="description" class="text-info">Descripci&oacute;n</label>
                                     <textarea class="form-control" rows="6" cols="40" name="descrition" disabled="disabled">{{$noticia->description}}</textarea>
                                 </div>
                                 <div id="register-link" class="text-center">
-                                    <a class="btn btn-secondary" href="{{ route('listado-novedades') }}" role="button">Cancelar</a>
+                                    <a class="btn btn-secondary" href="{{ route('listado-noticias') }}" role="button">Cancelar</a>
                                 </div>
                             </div>
                         </div>
