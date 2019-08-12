@@ -25,7 +25,7 @@
                     <div class="col-md-4">
                         <h2>Asesorate</h2>
                         <p>Permite contactarse con el 144, 911 y el 0800 777 5000 y otros organismos especializados.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="{{ route('asesorate') }}" role="button">Ver más &raquo;</a></p>
                     </div>
                 </div>
                 <div class="row">
