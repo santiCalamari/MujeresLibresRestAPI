@@ -13,26 +13,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <h2>Centros de Ayuda</h2>
-                        <p> Las personas que recorren la ruta de la denuncia, pueden registrar las instituciones a las que han acuddo y calificar la atención recibida en las mismas.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
-                    </div>
-                    <div class="col-md-4">
-                        <h2>Test</h2>
-                        <p> Permite realizar encuestas sobre cuestiones de género. </p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
-                    </div>
-                    <div class="col-md-4">
-                        <h2>Asesorate</h2>
-                        <p>Permite contactarse con el 144, 911 y el 0800 777 5000 y otros organismos especializados.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
                         <h2>Informate</h2>
                         <p> Permite encontrar información sobre: Violencias de Género, Derechos y Recursos existentes, Educación Sexual Integral, a traves de contenidos interactivos y amigables.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
+                        <p><a class="btn btn-secondary" href="{{ route('informate') }}" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
                         <h2>Novedades</h2>
@@ -40,9 +23,9 @@
                         <p><a class="btn btn-secondary" href="{{ route('listado-novedades') }}" role="button">Ver más &raquo;</a></p>
                     </div>
                     <div class="col-md-4">
-                        <h2>Encontrarte</h2>
-                        <p> Permite sumarse al voluntariado Municipal sobre trata de personas y violencias de género.</p>
-                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
+                        <h2>Asesorate</h2>
+                        <p>Permite contactarse con el 144, 911 y el 0800 777 5000 y otros organismos especializados.</p>
+                        <p><a class="btn btn-secondary" href="{{ route('asesorate') }}" role="button">Ver más &raquo;</a></p>
                     </div>
                 </div>
                 <div class="row">
@@ -57,11 +40,25 @@
                         <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
                     </div>
                 </div>
-
+<!--            <div class="row">
+                    <div class="col-md-4">
+                        <h2>Centros de Ayuda</h2>
+                        <p> Las personas que recorren la ruta de la denuncia, pueden registrar las instituciones a las que han acuddo y calificar la atención recibida en las mismas.</p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Test</h2>
+                        <p> Permite realizar encuestas sobre cuestiones de género. </p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Encontrarte</h2>
+                        <p> Permite sumarse al voluntariado Municipal sobre trata de personas y violencias de género.</p>
+                        <p><a class="btn btn-secondary" href="#" role="button">Ver más &raquo;</a></p>
+                    </div>
+                </div>-->
                 <hr>
-
             </div> <!-- /container -->
-
         </main>
     </body>
     <footer class="container">

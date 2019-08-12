@@ -14,6 +14,7 @@
                 <div id="login-row" class="row justify-content-center align-items-center">
                     <div id="login-column" class="col-md-6">
                         <div id="login-box" class="col-md-12">
+                            <br>
                             <h3 class="text-center text-info">Iniciar Sesión</h3>
                             {{ Form::open(array('url' => '/login')) }}
                             <div class="form-group">
@@ -29,8 +30,9 @@
                                 {{ Form::checkbox('rememberme', true) }}                                   
                             </div>
                             <div id="register-link" class="text-right">
-                                <a class="btn btn-secondary" href="#">¿Olvide mi contraseña?</a>
+                                <a class="btn btn-secondary" href="{{ route('inicio') }}" role="button">Cancelar</a>
                                 {{ Form::submit('Enviar', ['class' => 'btn btn-info btn-md']) }}
+                                <a class="btn btn-secondary" href="#">¿Olvide mi contraseña?</a>
                             </div>
                             {{ Form::close() }}
                         </div>

@@ -31,7 +31,7 @@
                                     {{ Form::textarea('description', '', ['class' => 'form-control', 'rows' => 6, 'cols' => 40]) }}
                                 </div>
                                 <div id="register-link" class="text-center">
-                                    <a class="btn btn-secondary" href="{{ route('listado-noticia') }}" role="button">Cancelar</a>
+                                    <a class="btn btn-secondary" href="{{ route('listado-noticias') }}" role="button">Cancelar</a>
                                     {{ Form::submit('Enviar', ['class' => 'btn btn-info btn-md']) }}
                                 </div>
                                 {{ Form::close() }}

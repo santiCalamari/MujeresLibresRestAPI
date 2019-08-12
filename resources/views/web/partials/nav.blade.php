@@ -16,11 +16,12 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('iniciar-sesion') }}">Iniciar Sesión <span class="sr-only">(current) </span></a>
             </li>
+            @if (Auth::check())
             <li class="nav-item">
-                <a class="nav-link" href="#">Registrarse</a>
+                <a class="nav-link" href="{{ route('registrarse') }}">Registrarse</a>
             </li>      
             @endif
-
+            @endif
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar">
