@@ -2,9 +2,6 @@
 <html lang="en">
     @include('web.partials.head') 
     @include('web.partials.nav')
-    <br>
-    <br>
-    <br>
     <body>
         <div id="evento">
             <div class="container">
@@ -32,7 +29,7 @@
                                 </div>
                                 <div class="form-group">
                                     {{ Form::label('description', 'Ingrese una descripción', ['class' => 'text-info']) }}
-                                    {{ Form::textarea('descrition', '', ['class' => 'form-control', 'rows' => 6, 'cols' => 40]) }}
+                                    {{ Form::textarea('description', '', ['class' => 'form-control', 'rows' => 6, 'cols' => 40]) }}
                                 </div>
                                 <div id="register-link" class="text-center">
                                     <a class="btn btn-secondary" href="{{ route('listado-novedades') }}" role="button">Cancelar</a>

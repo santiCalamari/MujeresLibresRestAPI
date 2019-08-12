@@ -4,14 +4,11 @@
     @include('web.partials.nav')
     <body>
         <main role="main">
-            <div class="col-12">
-                <div class="jumbotron panel-mujeres-libres">
-                    <div class="container">
-                        <br>
-                        <p class="display-4 text-center mujeres-libres"> Novedades - Eventos y efemérides </p>
-                    </div>
-                </div>
+            <div class="col-12 mujeres-libres">
+                <h1 class="titulo-seccion bs-docs-featurette-title"> Novedades </h1>
+                <p class="slogan">Eventos y efemerides</p>
             </div>
+            <br>
             <div class="col-12">
                 <div class="row">
                     @if (Auth::check())

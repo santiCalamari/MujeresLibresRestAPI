@@ -4,14 +4,11 @@
     @include('web.partials.nav')
     <body>
         <main role="main">
-            <div class="col-12">
-                <div class="jumbotron panel-mujeres-libres">
-                    <div class="container">
-                        <br>
-                        <p class="display-4 text-center mujeres-libres"> Noticias </p>
-                    </div>
-                </div>
+            <div class="col-12 mujeres-libres">
+                <h1 class="titulo-seccion bs-docs-featurette-title"> Noticias </h1>
+                <p class="slogan">Noticias a nivel local, provincial, nacional e internacional.</p>
             </div>
+            <br>
             <div class="col-12">
                 <div class="row">
                     @if (Auth::check())

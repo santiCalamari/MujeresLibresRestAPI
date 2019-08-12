@@ -2,9 +2,6 @@
 <html lang="en">
     @include('web.partials.head') 
     @include('web.partials.nav')
-    <br>
-    <br>
-    <br>
     <body>
         <div id="efemeride">
             <div class="container">
