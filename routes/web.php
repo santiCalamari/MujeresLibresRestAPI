@@ -22,6 +22,9 @@ Route::post('register', 'Web\UserController@register');
 
 Route::get('listado-novedades', ['as' => 'listado-novedades', 'uses' => 'Web\NovedadController@getAll']);
 Route::get('listado-noticias', ['as' => 'listado-noticias', 'uses' => 'Web\NoticiaController@getAll']);
+Route::get('/asesorate', function () {
+    return view('web.layouts.asesorate');
+})->name('asesorate');
 
 Route::get('ver-evento/{id}', ['as' => 'ver-evento', 'uses' => 'Web\NovedadController@verEvento']);
 Route::get('Ver-efemeride/{id}', ['as' => 'ver-efemeride', 'uses' => 'Web\NovedadController@verEfemeride']);
@@ -44,7 +47,7 @@ Route::group(array('before' => 'auth'), function() {
 
     Route::get('editar-efemeride/{id}', ['as' => 'editar-efemeride', 'uses' => 'Web\NovedadController@showEditarEfemeride']);
     Route::patch('edit-efemeride/{id}', ['as' => 'edit-efemeride', 'uses' => 'Web\NovedadController@editarEfemeride']);
-    
+
     Route::get('editar-noticia/{id}', ['as' => 'editar-noticia', 'uses' => 'Web\NoticiaController@showEditarNoticia']);
     Route::patch('edit-noticia/{id}', ['as' => 'edit-noticia', 'uses' => 'Web\NoticiaController@editarNoticia']);
 
