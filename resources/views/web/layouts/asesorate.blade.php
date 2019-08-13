@@ -50,9 +50,9 @@
                 <div class="col-md-4">
                     <div class="card asesorate-card">
                         <div class="card-body">
-                            <h4 class="card-title">Centros Territoriales de Denuncias</h4>
+                            <h4 class="card-title">Centros Territoriales de Denuncias Centro</h4>
                             <div class="asesorate-body">
-                                <h5 class="card-text">Centro: Las Heras 2882</h5>
+                                <h5 class="card-text">Las Heras 2882</h5>
                                 <h5 class="card-text">Tel: 4815578 / 4559785</h5>
                             </div>
                             <a target="_blank" href="https://www.defensoriasantafe.gob.ar/" class="card-link">Web</a>
@@ -63,9 +63,9 @@
                 <div class="col-md-4">
                     <div class="card asesorate-card">
                         <div class="card-body">
-                            <h4 class="card-title">Centros Territoriales de Denuncias</h4>
+                            <h4 class="card-title">Centros Territoriales de Denuncias Norte</h4>
                             <div class="asesorate-body">
-                                <h5 class="card-text">Norte: Aristóbulo del Valle 7401</h5>
+                                <h5 class="card-text">Aristóbulo del Valle 7401</h5>
                                 <h5 class="card-text">Tel.:4833446 Horario de atención: 8 a 20 hs</h5>
                             </div>
                             <a target="_blank" href="https://www.santafe.gov.ar/index.php/web/content/view/full/198373/(subtema)/93821" class="card-link">Web</a>
@@ -105,6 +105,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <br>
+        <div class='row'>
+            <div class="col-md-12 text-center">
+                <a class="btn btn-secondary" href="{{ route('inicio') }}" role="button">Volver</a>
             </div>
         </div>
     </body>

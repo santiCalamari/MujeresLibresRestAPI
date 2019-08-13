@@ -7,7 +7,7 @@
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
             <li class="nav-item active">
-                <a class="nav-link" href="#">Mi perfil<span class="sr-only">(current) </span></a>
+                <a class="nav-link" href="{{ route('perfil') }}">Mi perfil<span class="sr-only">(current) </span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('cerrar-sesion') }}">Salir</a>

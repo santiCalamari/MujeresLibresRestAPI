@@ -15,15 +15,16 @@ Route::get('/', function () {
 })->name('inicio');
 
 Route::get('iniciar-sesion', ['as' => 'iniciar-sesion', 'uses' => 'Web\UserController@showlogin']);
-
 Route::post('login', 'Web\UserController@login');
-Route::post('register', 'Web\UserController@register');
 
 Route::get('listado-novedades', ['as' => 'listado-novedades', 'uses' => 'Web\NovedadController@getAll']);
+
 Route::get('listado-noticias', ['as' => 'listado-noticias', 'uses' => 'Web\NoticiaController@getAll']);
+
 Route::get('/asesorate', function () {
     return view('web.layouts.asesorate');
 })->name('asesorate');
+
 Route::get('/informate', function () {
     return view('web.layouts.informate');
 })->name('informate');
@@ -34,7 +35,9 @@ Route::get('Ver-efemeride/{id}', ['as' => 'ver-efemeride', 'uses' => 'Web\Noveda
 Route::get('Ver-noticia/{id}', ['as' => 'ver-noticia', 'uses' => 'Web\NoticiaController@verNoticia']);
 
 Route::group(array('before' => 'auth'), function() {
-    Route::get('registrarse', ['as' => 'registrarse', 'uses' => 'Web\UserController@showRegister']);    
+    Route::get('perfil', 'Web\UserController@showPerfil');
+    Route::post('register', 'Web\UserController@register');
+    Route::get('registrarse', ['as' => 'registrarse', 'uses' => 'Web\UserController@showRegister']);
     Route::get('cerrar-sesion', ['as' => 'cerrar-sesion', 'uses' => 'Web\UserController@logOut']);
 
     Route::get('agregar-evento', ['as' => 'agregar-evento', 'uses' => 'Web\NovedadController@showAgregarEvento']);

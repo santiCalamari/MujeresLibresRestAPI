@@ -107,7 +107,14 @@
                 </div>
             </div>
         </div>
-    </div>        
+    </div>   
+    <br>
+    <div class='row'>
+        <div class="col-md-12 text-center">
+            <a class="btn btn-secondary" href="{{ route('inicio') }}" role="button">Volver</a>
+        </div>
+    </div>
+    <br><br><br><br>
 </body>
 </html>
 

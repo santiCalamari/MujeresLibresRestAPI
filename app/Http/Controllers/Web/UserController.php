@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
@@ -82,7 +83,7 @@ class UserController extends Controller
     }
 
     /**
-     * logout api
+     * logout web
      *
      * @return \Illuminate\Http\Response
      */
@@ -94,14 +95,16 @@ class UserController extends Controller
     }
 
     /**
-     * details api
+     * show perfil web
      *
      * @return \Illuminate\Http\Response
      */
-    public function details()
+    public function showPerfil()
     {
-        $user = Auth::user();
-        return User::where('id', $user->id)->get();
+//        if (Auth::check()) {
+        return View::make('web.layouts.perfil');
+//        }
+//        return Redirect::to('/');
     }
 
     /**
@@ -128,20 +131,6 @@ class UserController extends Controller
             }
         }
         return response()->json("Error al cambiar la contrasena", 500);
-    }
-
-    /**
-     * details api
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function voluntario()
-    {
-        //    $user = User::where('id', $user_id)->get()->toArray();
-        $user = Auth::user();
-        $user->es_voluntario = true;
-        $user->save();
-        return response()->json($user, 200);
     }
 
     public function actualizarUsuario(Request $request, User $user)
