@@ -17,7 +17,7 @@ and open the template in the editor.
     font-family: sans-serif !important;
     color: #FFFFFF !important;
     background:  #554063 !important;
-    height: 150px !important;
+    height: 170px !important;
 }
 
 .titulo-seccion{
@@ -172,4 +172,16 @@ and open the template in the editor.
 .informate-panel{
     background-color: #554063;
     color: #ffffff !important;
+}
+
+.asesorate-card{
+    height: 190px;
+}
+
+.asesorate-body{
+    height: 90px;
+}
+
+.card{
+    border: 2px solid  #554063 !important;
 }
