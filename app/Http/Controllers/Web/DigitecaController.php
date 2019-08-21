@@ -1,99 +1,124 @@
 <?php
-
 namespace App\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Digiteca;
+use View;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 
 class DigitecaController extends Controller
 {
 
-    public $successStatus = 200;
-
-    public function index()
+    public function getAll()
     {
-        return "indexD";
-        return Digiteca::all();
+        $digitecas = Digiteca::all();
+        return view('web.layouts.informate', compact('digitecas'));
     }
 
-    public function show(Digiteca $digiteca) {
-        return "showD";
-        return $digiteca;
+    public function showAgregarDigiteca()
+    {
+        if (Auth::check()) {
+            return View::make('web.layouts.agregar-digiteca');
+        }
+        return Redirect::to('/');
     }
 
-    public function store(Request $request)
+    public function agregarDigiteca()
     {
-        return "storeD";
-        if (!$this->validarName($request)) {
-            return response()->json('Error al crear nombre de digiteca.', 400);
+        $digitecadata = array(
+            'name' => Input::get('name'),
+            'web_site' => Input::get('web_site')
+        );
+
+        if (!$this->validarName($digitecadata['name'])) {
+            return redirect()->route('agregar-digiteca', [$id])
+                    ->with('mensaje_error', 'Error. Inserta un titulo.')
+                    ->withInput();
         }
 
-        if (!$this->validarWebSite($request)) {
-            return response()->json('Error al crear sitio web de digiteca.', 400);
+        if (!$this->validarWebSite($digitecadata['web_site'])) {
+            return redirect()->route('agregar-digiteca', [$id])
+                    ->with('mensaje_error', 'Error. Inserta un sitio de internet')
+                    ->withInput();
         }
 
-        $request = $this->agregarHttp($request);
+        $digitecadata['date_at'] = $this->agregarHttp($digitecadata['web_site']);
 
-        $digiteca = Digiteca::create($request->all());
-        return response()->json($digiteca, 201);
+
+        Digiteca::create($digitecadata);
+        return Redirect::to('informate');
     }
 
-    public function update(Request $request, Digiteca $digiteca)
+    public function showEditarDigiteca($id)
     {
-        return "updateD"; 
-        if (!$this->validarName($request)) {
-            return response()->json('Error al editar nombre de digiteca.', 400);
+        if (Auth::check()) {
+            $digiteca = Digiteca::find($id);
+            return View::make('web.layouts.editar-digiteca')->with('digiteca', $digiteca);
         }
-
-        if (!$this->validarWebSite($request)) {
-            return response()->json('Error al editar sitio web de digiteca.', 400);
-        }
-        
-        if ($request->input('web_site')) {
-            $request = $this->agregarHttp($request);
-        }
-
-        $digiteca->update($request->all());
-        return response()->json($digiteca, 200);
+        return Redirect::to('/');
     }
 
-    public function delete(Digiteca $digiteca)
+    public function editarDigiteca($id)
     {
-        return "deleteD";
+        if (Auth::check()) {
+            $digitecadata = array(
+                'name' => Input::get('name'),
+                'web_site' => Input::get('web_site')
+            );
+
+            if (!$this->validarName($digitecadata['name'])) {
+                return redirect()->route('editar-digiteca', [$id])
+                        ->with('mensaje_error', 'Error. Inserta un titulo.')
+                        ->withInput();
+            }
+
+            if (!$this->validarWebSite($digitecadata['web_site'])) {
+                return redirect()->route('editar-digiteca', [$id])
+                        ->with('mensaje_error', 'Error. Inserta un sitio de internet')
+                        ->withInput();
+            }
+
+            $digitecadata['web_site'] = $this->agregarHttp($digitecadata['web_site']);
+            $digiteca = Digiteca::find($id);
+            $digiteca->name = $digitecadata['name'];
+            $digiteca->web_site = $digitecadata['web_site'];
+
+            $digiteca->save();
+            return Redirect::to('informate');
+        }
+        return Redirect::to('/');
+    }
+
+    public function eliminar($id)
+    {
+        $digiteca = Digiteca::find($id);
         $digiteca->delete();
-        return response()->json('Digiteca eliminada', 204);
+        return Redirect::to('informate');
     }
 
-    public function validarName(Request $request)
+    public function validarName($name)
     {
-        return "validarNameD";
-        $name = $request->input('name');
         if (!$name || !isset($name)) {
             return false;
         }
         return true;
     }
 
-    public function validarWebSite(Request $request)
+    public function validarWebSite($web_site)
     {
-        return "validarWebSiteD";
-        $web_site = $request->input('web_site');
         if (!$web_site || !isset($web_site)) {
             return false;
         }
         return true;
     }
 
-    public function agregarHttp(Request $request)
+    public function agregarHttp($web_site)
     {
-        return "agregarHttpD";
-        $web_site = $request->input('web_site');
-        if (!strpos($web_site, "http://")) {
-            $request->merge(['web_site' => "http://" . $web_site]);
+        if (strpos($web_site, "http://") === false) {
+            $web_site = "http://" . $web_site;
         }
-        return $request;
+        return $web_site;
     }
 }

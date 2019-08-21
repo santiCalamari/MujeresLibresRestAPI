@@ -101,7 +101,45 @@
                     </a>
                     <div id="collapseFour" class="collapse" data-parent="#accordion">
                         <div class="card-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            <div class="col-12">
+                                <table class="table table-striped w-auto table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            @if (Auth::check())
+                                            <th class="d-none d-print-block" scope="col">Id</th>
+                                            <th scope="col">Título</th>
+                                            <th scope="col">Sitio web</th>
+                                            <th scope="col">Opciones</th>
+                                            @else
+                                            <th scope="col">Título</th>
+                                            <th scope="col">Sitio web</th>
+                                            @endif
+                                        </tr>
+                                    </thead>
+                                    <tbody id="digitecas">
+                                        @foreach($digitecas as $k => $digiteca)
+                                        <tr>
+                                            @if (Auth::check())
+                                            <td>{{ $digiteca['name'] }}</td>
+                                            <td>{{ $digiteca['web_site'] }}</td>
+                                            <td>
+                                                <a class="btn btn-secondary btn-sm" href="{{ route('agregar-digiteca') }}" role="button" title="Agregar"><span class="glyphicon glyphicon-plus"></span></a>
+                                                <a class="btn btn-secondary btn-sm" href="{{ route('editar-digiteca', $digiteca['id']) }}" role="button" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                                {{ Form::open(['route' => ['eliminar-digiteca', $digiteca['id']], 'method' => 'delete']) }}
+                                                <button type="submit" class="btn btn-secondary btn-sm">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>    
+                                                {{ Form::close() }}
+                                            </td>                            
+                                            @else
+                                            <td>{{ $digiteca['name'] }}</td>
+                                            <td>{{ $digiteca['web_site'] }}</td>
+                                            @endif
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table> 
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -53,23 +53,23 @@
                             @if($novedad['isNew'])<td>Evento</td>@else<td>Efeméride</td>@endif
                             <td>{{ $novedad['title'] }}</td>
                             <td>
-                                @if($novedad['isNew'])
-                                <a class="btn btn-secondary btn-sm" href="{{ route('ver-evento', $novedad['id']) }}" role="button" title="Ver"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                @else
-                                <a class="btn btn-secondary btn-sm" href="{{ route('ver-efemeride', $novedad['id']) }}" role="button" title="Ver"><span class="glyphicon glyphicon-info-sign"></span></a>
-                                @endif
-
-                                @if($novedad['isNew'])
-                                <a class="btn btn-secondary btn-sm" href="{{ route('editar-evento', $novedad['id']) }}" role="button" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
-                                @else
-                                <a class="btn btn-secondary btn-sm" href="{{ route('editar-efemeride', $novedad['id']) }}" role="button" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
-                                @endif
-
-                                {{ Form::open(['route' => ['eliminar-novedad', $novedad['id']], 'method' => 'delete']) }}
-                                <button type="submit" class="btn btn-secondary btn-sm">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button>    
-                                {{ Form::close() }}
+                                <div class="btn-group">
+                                    @if($novedad['isNew'])
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('ver-evento', $novedad['id']) }}" role="button" title="Ver"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                    @else
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('ver-efemeride', $novedad['id']) }}" role="button" title="Ver"><span class="glyphicon glyphicon-info-sign"></span></a>
+                                    @endif
+                                    @if($novedad['isNew'])
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('editar-evento', $novedad['id']) }}" role="button" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    @else
+                                    <a class="btn btn-secondary btn-sm" href="{{ route('editar-efemeride', $novedad['id']) }}" role="button" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    @endif
+                                    {{ Form::open(['route' => ['eliminar-novedad', $novedad['id']], 'method' => 'delete']) }}
+                                    <button type="submit" class="btn btn-secondary btn-sm">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>    
+                                    {{ Form::close() }}
+                                </div>
                             </td>                            
                             @else
                             <td>{{ substr($novedad['date_at'], 8, 2) }}/{{ substr($novedad['date_at'], 5, 2) }}/{{ substr($novedad['date_at'], 0, 4) }}</td>

@@ -185,3 +185,31 @@ and open the template in the editor.
 .card{
     border: 2px solid  #554063 !important;
 }
+
+#perfil .container #perfil-row #perfil-column #perfil-box {
+    margin-top: 10px;
+    max-width: 800px;
+    height: 650px;
+    border: 1px solid #9C9C9C;
+    background-color: #554063;
+}
+#perfil .container #perfil-row #perfil-column #perfil-box #perfil-form {
+    padding: 20px;
+}
+#perfil .container #perfil-row #perfil-column #perfil-box #perfil-form #perfil-link {
+    margin-top: -2px;
+}
+
+#digiteca .container #digiteca-row #digiteca-column #digiteca-box {
+    margin-top: 10px;
+    max-width: 800px;
+    height: 300px;
+    border: 1px solid #9C9C9C;
+    background-color: #554063;
+}
+#digiteca .container #digiteca-row #digiteca-column #digiteca-box #digiteca-form {
+    padding: 20px;
+}
+#digiteca .container #digiteca-row #digiteca-column #digiteca-box #digiteca-form #digiteca-link {
+    margin-top: -2px;
+}

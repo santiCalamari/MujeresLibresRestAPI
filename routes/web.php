@@ -18,24 +18,21 @@ Route::get('iniciar-sesion', ['as' => 'iniciar-sesion', 'uses' => 'Web\UserContr
 Route::post('login', 'Web\UserController@login');
 
 Route::get('listado-novedades', ['as' => 'listado-novedades', 'uses' => 'Web\NovedadController@getAll']);
-
 Route::get('listado-noticias', ['as' => 'listado-noticias', 'uses' => 'Web\NoticiaController@getAll']);
+Route::get('informate', ['as' => 'informate', 'uses' => 'Web\DigitecaController@getAll']);
 
 Route::get('/asesorate', function () {
     return view('web.layouts.asesorate');
 })->name('asesorate');
-
-Route::get('/informate', function () {
-    return view('web.layouts.informate');
-})->name('informate');
-
 
 Route::get('ver-evento/{id}', ['as' => 'ver-evento', 'uses' => 'Web\NovedadController@verEvento']);
 Route::get('Ver-efemeride/{id}', ['as' => 'ver-efemeride', 'uses' => 'Web\NovedadController@verEfemeride']);
 Route::get('Ver-noticia/{id}', ['as' => 'ver-noticia', 'uses' => 'Web\NoticiaController@verNoticia']);
 
 Route::group(array('before' => 'auth'), function() {
-    Route::get('perfil', 'Web\UserController@showPerfil');
+    Route::get('perfil', ['as' => 'perfil', 'uses' => 'Web\UserController@showPerfil']);
+    Route::patch('perfil/{id}', ['as' => 'edit-perfil', 'uses' => 'Web\UserController@editarPerfil']);
+
     Route::post('register', 'Web\UserController@register');
     Route::get('registrarse', ['as' => 'registrarse', 'uses' => 'Web\UserController@showRegister']);
     Route::get('cerrar-sesion', ['as' => 'cerrar-sesion', 'uses' => 'Web\UserController@logOut']);
@@ -49,6 +46,9 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('agregar-noticia', ['as' => 'agregar-noticia', 'uses' => 'Web\NoticiaController@showAgregarNoticia']);
     Route::post('add-noticia', 'Web\NoticiaController@agregarNoticia');
 
+    Route::get('agregar-digiteca', ['as' => 'agregar-digiteca', 'uses' => 'Web\DigitecaController@showAgregarDigiteca']);
+    Route::post('add-digiteca', 'Web\DigitecaController@agregarDigiteca');
+
     Route::get('editar-evento/{id}', ['as' => 'editar-evento', 'uses' => 'Web\NovedadController@showEditarEvento']);
     Route::patch('edit-evento/{id}', ['as' => 'edit-evento', 'uses' => 'Web\NovedadController@editarEvento']);
 
@@ -58,8 +58,12 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('editar-noticia/{id}', ['as' => 'editar-noticia', 'uses' => 'Web\NoticiaController@showEditarNoticia']);
     Route::patch('edit-noticia/{id}', ['as' => 'edit-noticia', 'uses' => 'Web\NoticiaController@editarNoticia']);
 
+    Route::get('editar-digiteca/{id}', ['as' => 'editar-digiteca', 'uses' => 'Web\DigitecaController@showEditarDigiteca']);
+    Route::patch('edit-digiteca/{id}', ['as' => 'edit-digiteca', 'uses' => 'Web\DigitecaController@editarDigiteca']);
+
     Route::delete('eliminar-novedad/{id}', ['as' => 'eliminar-novedad', 'uses' => 'Web\NovedadController@eliminar']);
     Route::delete('eliminar-noticidad/{id}', ['as' => 'eliminar-noticia', 'uses' => 'Web\NoticiaController@eliminar']);
+    Route::delete('eliminar-digiteca/{id}', ['as' => 'eliminar-digiteca', 'uses' => 'Web\DigitecaController@eliminar']);
 });
 
 

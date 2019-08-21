@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
@@ -101,10 +100,37 @@ class UserController extends Controller
      */
     public function showPerfil()
     {
-//        if (Auth::check()) {
-        return View::make('web.layouts.perfil');
-//        }
-//        return Redirect::to('/');
+        if (Auth::check()) {
+            $user = Auth::user();
+            return View::make('web.layouts.perfil')->with('user', $user);
+        }
+        return Redirect::to('/');
+    }
+
+    public function editarPerfil($id)
+    {
+        if (Auth::check()) {
+            $userdata = array(
+                'nombre-apellido' => Input::get('nombre-apellido'),
+                'email' => Input::get('email'),
+                'barrio' => Input::get('barrio'),
+                'direccion' => Input::get('direccion'),
+                'telefono' => Input::get('telefono'),
+                'celular' => Input::get('celular')                
+            );
+
+            $user = Auth::user($id);
+            $user->name = $userdata['nombre-apellido'];
+            $user->email = $userdata['email'];
+            $user->neighborhood = $userdata['barrio'];
+            $user->addresss = $userdata['direccion'];
+            $user->phone = $userdata['telefono'];
+            $user->cellphone = $userdata['celular'];
+   
+            $user->save();
+            return Redirect::to('/');
+        }
+        return Redirect::to('/');
     }
 
     /**
