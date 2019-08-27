@@ -9,23 +9,35 @@ use App\CentroAyuda;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class OpinionController extends Controller {
+class OpinionController extends Controller
+{
 
     public $successStatus = 200;
 
-//    public function index() {
-//        return Opinion::all();
-//    }
+    public function index()
+    {
+        $semilla = 'mujeres-dev';
+        if ($semilla == $codigo) {
+            return Opinion::all();
+        }
+        return response()->json($user, 401);
+    }
 
-    public function show($user_id, $centro_ayuda_id) {
+    public function show($user_id, $centro_ayuda_id)
+    {
+        $user = Auth::user();
+        if ($user->id != $user_id) {
+            return response()->json($user, 401);
+        }
         $opinion = Opinion::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->get();
-        if (!$opinion2->toArray()) {
+        if (!$opinion->toArray()) {
             return response()->json('No se encontro opinion registrada para el centro de ayuda seleccionado.', 400);
         }
         return $opinion[0];
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         if (!$this->validarName($request)) {
             return response()->json('Error al calificar un centro de ayuda.', 400);
         }
@@ -42,7 +54,7 @@ class OpinionController extends Controller {
             return response()->json('Error. Debe ingresar una calificacion.', 400);
         }
 
-        $opinion = Opinion::create($request->all());        
+        $opinion = Opinion::create($request->all());
         if ($this->updateCentroAyuda($request->input('centro_ayuda_id'), $request->input('average'))) {
             return response()->json($opinion, 201);
         } else {
@@ -77,7 +89,8 @@ class OpinionController extends Controller {
 //        return response()->json('Opinion eliminada', 204);
 //    }
 
-    public function validarName(Request $request) {
+    public function validarName(Request $request)
+    {
         $name = $request->input('name');
         if (!$name || !isset($name)) {
             return false;
@@ -85,7 +98,8 @@ class OpinionController extends Controller {
         return true;
     }
 
-    public function validarAverage(Request $request) {
+    public function validarAverage(Request $request)
+    {
         $average = $request->input('average');
         if (!$average || !isset($average)) {
             return false;
@@ -93,7 +107,8 @@ class OpinionController extends Controller {
         return true;
     }
 
-    public function validarUserId(Request $request) {
+    public function validarUserId(Request $request)
+    {
         $user_id = $request->input('user_id');
         if (!$user_id || !isset($user_id)) {
             return false;
@@ -106,7 +121,8 @@ class OpinionController extends Controller {
         return false;
     }
 
-    public function validarCentroAyudaId(Request $request) {
+    public function validarCentroAyudaId(Request $request)
+    {
         $centro_ayuda_id = $request->input('centro_ayuda_id');
         if (!$centro_ayuda_id || !isset($centro_ayuda_id)) {
             return false;
@@ -119,7 +135,8 @@ class OpinionController extends Controller {
         return false;
     }
 
-    public function updateCentroAyuda($centro_ayuda_id, $average) {
+    public function updateCentroAyuda($centro_ayuda_id, $average)
+    {
         if ($centroAyuda = CentroAyuda::where('id', $centro_ayuda_id)->get()->toArray()) {
             $voters = $centroAyuda[0]['voters'];
             $general = (($centroAyuda[0]['average_general'] * $voters) + $average) / ($voters + 1);
@@ -129,5 +146,4 @@ class OpinionController extends Controller {
             return false;
         }
     }
-
 }

@@ -8,15 +8,26 @@ use App\Favorito;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class FavoritoController extends Controller {
+class FavoritoController extends Controller
+{
 
     public $successStatus = 200;
 
-//    public function index() {
-//        return Favorito::all();
-//    }
+    public function index($codigo)
+    {
+        $semilla = 'mujeres-dev';
+        if ($semilla == $codigo) {
+            return Favorito::all();
+        }
+        return response()->json($user, 401);
+    }
 
-    public function show($user_id) {
+    public function show($user_id)
+    {
+        $user = Auth::user();
+        if ($user->id != $user_id) {
+            return response()->json($user, 401);
+        }
         if ($favoritos = Favorito::where('user_id', $user_id)->get()->toArray()) {
             $centros_ayuda = array();
             foreach ($favoritos as $k => $fav) {
@@ -32,7 +43,8 @@ class FavoritoController extends Controller {
         }
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         if (!$this->validarUserId($request)) {
             return response()->json('Error al agregar a favoritos un centro de ayuda. Usuario inexistente.', 400);
         }
@@ -56,7 +68,12 @@ class FavoritoController extends Controller {
 //        return response()->json($favorito, 200);
 //    }
 
-    public function delete($user_id, $centro_ayuda_id) {
+    public function delete($user_id, $centro_ayuda_id)
+    {
+        $user = Auth::user();
+        if ($user->id != $user_id) {
+            return response()->json($user, 401);
+        }
         $favorito = Favorito::where('user_id', $user_id)->where('centro_ayuda_id', $centro_ayuda_id)->get();
         if (empty($favorito)) {
             return response()->json('Error al eliminar centro de ayuda de favoritos', 500);
@@ -66,7 +83,8 @@ class FavoritoController extends Controller {
         }
     }
 
-    public function validarUserId(Request $request) {
+    public function validarUserId(Request $request)
+    {
         $user_id = $request->input('user_id');
         if (!$user_id || !isset($user_id)) {
             return false;
@@ -79,7 +97,8 @@ class FavoritoController extends Controller {
         return false;
     }
 
-    public function validarCentroAyudaId(Request $request) {
+    public function validarCentroAyudaId(Request $request)
+    {
         $centro_ayuda_id = $request->input('centro_ayuda_id');
         if (!$centro_ayuda_id || !isset($centro_ayuda_id)) {
             return false;
@@ -91,5 +110,4 @@ class FavoritoController extends Controller {
         }
         return false;
     }
-
 }

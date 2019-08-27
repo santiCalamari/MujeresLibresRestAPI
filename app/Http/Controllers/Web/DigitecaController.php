@@ -1,17 +1,19 @@
 <?php
-
 namespace App\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Digiteca;
+use View;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
 
 class DigitecaController extends Controller
 {
 
     public function getAll()
     {
-        $digitecas = Digiteca::paginate(10);
+        $digitecas = Digiteca::all();
         return view('web.layouts.informate', compact('digitecas'));
     }
 
@@ -31,31 +33,22 @@ class DigitecaController extends Controller
         );
 
         if (!$this->validarName($digitecadata['name'])) {
-            return Redirect::to('agregar-digiteca')
-                    ->with('mensaje_error', 'Error. Inserte un nombre.')
+            return redirect()->route('agregar-digiteca', [$id])
+                    ->with('mensaje_error', 'Error. Inserta un titulo.')
                     ->withInput();
         }
 
         if (!$this->validarWebSite($digitecadata['web_site'])) {
-            return Redirect::to('agregar-digiteca')
-                    ->with('mensaje_error', 'Error. Inserte un sitio web.')
+            return redirect()->route('agregar-digiteca', [$id])
+                    ->with('mensaje_error', 'Error. Inserta un sitio de internet')
                     ->withInput();
         }
 
-        if (!$this->agregarHttp($digitecadata['web_site'])) {
-            return Redirect::to('agregar-digiteca')
-                    ->with('mensaje_error', 'Error. Inserte con formato *****.')
-                    ->withInput();
-        }
+        $digitecadata['date_at'] = $this->agregarHttp($digitecadata['web_site']);
+
 
         Digiteca::create($digitecadata);
         return Redirect::to('informate');
-    }
-
-    public function verDigiteca($id)
-    {
-        $digiteca = Digiteca::find($id);
-        return View::make('web.layouts.ver-digiteca')->with('digiteca', $digiteca);
     }
 
     public function showEditarDigiteca($id)
@@ -76,26 +69,21 @@ class DigitecaController extends Controller
             );
 
             if (!$this->validarName($digitecadata['name'])) {
-                return Redirect::to('agregar-digiteca')
-                        ->with('mensaje_error', 'Error. Inserte un nombre.')
+                return redirect()->route('editar-digiteca', [$id])
+                        ->with('mensaje_error', 'Error. Inserta un titulo.')
                         ->withInput();
             }
 
             if (!$this->validarWebSite($digitecadata['web_site'])) {
-                return Redirect::to('agregar-digiteca')
-                        ->with('mensaje_error', 'Error. Inserte un sitio web.')
+                return redirect()->route('editar-digiteca', [$id])
+                        ->with('mensaje_error', 'Error. Inserta un sitio de internet')
                         ->withInput();
             }
 
-            if (!$this->agregarHttp($digitecadata['web_site'])) {
-                return Redirect::to('agregar-digiteca')
-                        ->with('mensaje_error', 'Error. Inserte con formato *****.')
-                        ->withInput();
-            }
-
-            $digiteca = Novedad::find($id);
-            $digiteca->title = $digitecadata['name'];
-            $digiteca->date_at = $digitecadata['web_site'];
+            $digitecadata['web_site'] = $this->agregarHttp($digitecadata['web_site']);
+            $digiteca = Digiteca::find($id);
+            $digiteca->name = $digitecadata['name'];
+            $digiteca->web_site = $digitecadata['web_site'];
 
             $digiteca->save();
             return Redirect::to('informate');
@@ -110,30 +98,27 @@ class DigitecaController extends Controller
         return Redirect::to('informate');
     }
 
-    public function validarName(Request $request)
+    public function validarName($name)
     {
-        $name = $request->input('name');
         if (!$name || !isset($name)) {
             return false;
         }
         return true;
     }
 
-    public function validarWebSite(Request $request)
+    public function validarWebSite($web_site)
     {
-        $web_site = $request->input('web_site');
         if (!$web_site || !isset($web_site)) {
             return false;
         }
         return true;
     }
 
-    public function agregarHttp(Request $request)
+    public function agregarHttp($web_site)
     {
-        $web_site = $request->input('web_site');
-        if (!strpos($web_site, "http://")) {
-            $request->merge(['web_site' => "http://" . $web_site]);
+        if (strpos($web_site, "http://") === false) {
+            $web_site = "http://" . $web_site;
         }
-        return $request;
+        return $web_site;
     }
 }

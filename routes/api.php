@@ -15,10 +15,11 @@ Route::post('login', 'API\UserController@login');
 Route::post('register', 'API\UserController@register');
 
 Route::group(['middleware' => 'auth:api'], function() {
+    Route::post('usuarios-todos/{codigo}', 'API\UserController@index');
     Route::post('logout', 'API\UserController@logout');
     Route::post('details', 'API\UserController@details');
     Route::post('change-password', 'API\UserController@changePassword');
-    Route::put('es-voluntario/{user_id}', 'API\UserController@voluntario');
+    Route::put('es-voluntario/{user_id}/{codigo_evento}', 'API\UserController@voluntario');
     Route::put('actualizar-usuario/{user}', 'API\UserController@actualizarUsuario');
     Route::post('recuperar-password', 'API\UserController@recuperarPassword');
 
@@ -41,19 +42,19 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::put('noticia/{noticia}', 'API\NoticiaController@update');
     Route::delete('noticia/{noticia}', 'API\NoticiaController@delete');
 
-//    Route::get('opinion', 'API\OpinionController@index');
+    Route::get('opinion-todos/{codigo}', 'API\OpinionController@index');
     Route::get('opinion/{user_id}/{centro_ayuda_id}', 'API\OpinionController@show');
     Route::post('opinion', 'API\OpinionController@store');
 //    Route::put('opinion/{centro_ayuda_id}', 'API\OpinionController@update');
 //    Route::delete('opinion/{opinion}', 'API\OpinionController@delete');
 //    
-//    Route::get('favorito', 'API\OpinionController@index');
+    Route::get('favorito-todos/{codigo}', 'API\OpinionController@index');
     Route::get('favorito/{user_id}', 'API\FavoritoController@show');
     Route::post('favorito', 'API\FavoritoController@store');
 //    Route::put('favorito/{centro_ayuda_id}', 'API\OpinionController@update');
     Route::delete('favorito/{user_id}/{centro_ayuda_id}', 'API\FavoritoController@delete');
 
-//    Route::get('centro-de-ayuda', 'API\CentroAyudaController@index');
+    Route::get('centro-de-ayuda-todos/{codigo}', 'API\CentroAyudaController@index');
     Route::get('centro-de-ayuda/{centro_ayuda_id}', 'API\CentroAyudaController@show');
 //    Route::post('centro-de-ayuda', 'API\CentroAyudaController@store');
     Route::put('centro-de-ayuda/{centroAyuda}', 'API\CentroAyudaController@update');
@@ -77,4 +78,18 @@ Route::group(['middleware' => 'auth:api'], function() {
 //    Route::post('rol', 'API\RolController@store');
 //    Route::put('rol/{rol}', 'API\RolController@update');
 //    Route::delete('rol/{rol}', 'API\RolController@delete');
+
+    Route::get('respuestas-todos/{codigo}', 'API\RespuestaController@index');
+//    Route::get('respuesta', 'API\RespuestaController@index');
+//    Route::get('respuesta/{respuesta}', 'API\RespuestaController@show');
+//    Route::post('respuesta', 'API\RespuestaController@store');
+//    Route::put('respuesta/{respuesta}', 'API\RespuestaController@update');
+//    Route::delete('respuesta/{respuesta}', 'API\RespuestaController@delete');
+
+    Route::get('consultas-todos/{codigo}', 'API\ConsultaController@index');
+//    Route::get('consulta', 'API\ConsultaController@index');
+//    Route::get('consulta/{consulta}', 'API\ConsultaController@show');
+    Route::post('enviar-consulta', 'API\ConsultaController@enviarConsulta');
+//    Route::put('consulta/{consulta}', 'API\ConsultaController@update');
+//    Route::delete('consulta/{consulta}', 'API\ConsultaController@delete');
 });
