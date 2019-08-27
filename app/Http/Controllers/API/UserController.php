@@ -11,20 +11,31 @@ use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RecuperarPassword;
 
-class UserController extends Controller {
+class UserController extends Controller
+{
 
     public $successStatus = 200;
+
+    public function index()
+    {
+        $semilla = 'mujeres-dev';
+        if ($semilla == $codigo) {
+            return User::all();
+        }
+        return response()->json($user, 401);
+    }
 
     /**
      * Register api
      *
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request) {
+    public function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-                    'nickname' => 'required',
-                    'password' => 'required',
-                    'c_password' => 'required|same:password',
+                'nickname' => 'required',
+                'password' => 'required',
+                'c_password' => 'required|same:password',
         ]);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 401);
@@ -43,7 +54,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function login() {
+    public function login()
+    {
         if (request('nickname') == null) {
             return response()->json(['error' => 'Ingrese un usuario'], 401);
         }
@@ -66,7 +78,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function logout() {
+    public function logout()
+    {
         $user = Auth::user();
         $user->AauthAcessToken()->delete();
         return response()->json('Sesion finalizada', 201);
@@ -77,7 +90,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function details() {
+    public function details()
+    {
         $user = Auth::user();
         return User::where('id', $user->id)->get();
     }
@@ -87,7 +101,8 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function changePassword(Request $request) {
+    public function changePassword(Request $request)
+    {
         $data = $request->all();
         if ($data['newPassword'] !== $data['newPassword_c']) {
             return response()->json("Las contrasena no coinciden", 500);
@@ -112,20 +127,39 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function voluntario($user_id) {
-        //    $user = User::where('id', $user_id)->get()->toArray();
+    public function voluntario($user_id, $codigo_evento)
+    {
         $user = Auth::user();
+        if ($user->id != $user_id) {
+            return response()->json($user, 401);
+        }
+
+        if (!in_array($codigo_evento, array("00", "01", "02", "03", "04", "05"))) {
+            return response()->json($user, 400);
+        }
+
+        if ($codigo_evento == "00") {
+            $codigo_evento = null;
+        }
+
         $user->es_voluntario = true;
+        $user->codigo_evento = $codigo_evento;
         $user->save();
         return response()->json($user, 200);
     }
 
-    public function actualizarUsuario(Request $request, User $user) {
+    public function actualizarUsuario(Request $request, User $user)
+    {
+        $usuario = Auth::user();
+        if ($usuario->id != $user->id) {
+            return response()->json($user, 401);
+        }
         $user->update($request->all());
         return response()->json($user, 200);
     }
 
-    public function recuperarPassword(Request $request) {
+    public function recuperarPassword(Request $request)
+    {
         if ($request->input('email') == null) {
             return response()->json(['error' => 'Ingrese un email'], 401);
         }
@@ -151,5 +185,4 @@ class UserController extends Controller {
             return response()->json("Hubo un erro al resetear la nueva contraseña. Intente nuevamente mas tarde!", 401);
         }
     }
-
 }

@@ -13,13 +13,18 @@ class CentroAyudaController extends Controller
 
     public $successStatus = 200;
 
-//    public function index() {
-//        return CentroAyuda::all();
-//    }
+    public function index($codigo)
+    {
+        $semilla = 'mujeres-dev';
+        if ($semilla == $codigo) {
+            return CentroAyuda::all();
+        }
+        return response()->json($user, 401);
+    }
 
-    
-    public function show($centro_ayuda_id) {
-        return CentroAyuda::where('id', $centro_ayuda_id)->get();        
+    public function show($centro_ayuda_id)
+    {
+        return CentroAyuda::where('id', $centro_ayuda_id)->get();
     }
 
 //        public function store(Request $request) {
@@ -27,7 +32,7 @@ class CentroAyudaController extends Controller
 //        return response()->json($centroAyuda, 201);
 //    }
 
-    
+
     public function update(Request $request, CentroAyuda $centroAyuda)
     {
         if (!$this->validarAverageGeneral($request)) {

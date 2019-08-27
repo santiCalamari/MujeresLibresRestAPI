@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use View;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Input;
+use Codedge\Fpdf\Fpdf\Fpdf;
 
 class UserController extends Controller
 {
@@ -181,5 +182,24 @@ class UserController extends Controller
         $obj->password = $password;
         Mail::to($email)->send(new recuperarPassword($obj));
         return response()->json("Se ha enviado un correo electronico con la nueva contraseña");
+    }
+
+    /**
+     * pdf listado usuario
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function pdf()
+    {
+        $pdf = new Fpdf();
+        $pdf->AddPage();
+        $pdf->Rect(10, 35, 195, 240);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Ln();
+        $pdf->Ln();
+        $pdf->AddPage();
+        $pdf->Rect(10, 35, 195, 240);
+        $pdf->Output();
+        exit;
     }
 }

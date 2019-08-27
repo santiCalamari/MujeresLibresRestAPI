@@ -9,7 +9,6 @@
   | contains the "web" middleware group. Now create something great!
   |
  */
-
 Route::get('/', function () {
     return view('web.layouts.mainlayout');
 })->name('inicio');
@@ -28,6 +27,8 @@ Route::get('/asesorate', function () {
 Route::get('ver-evento/{id}', ['as' => 'ver-evento', 'uses' => 'Web\NovedadController@verEvento']);
 Route::get('Ver-efemeride/{id}', ['as' => 'ver-efemeride', 'uses' => 'Web\NovedadController@verEfemeride']);
 Route::get('Ver-noticia/{id}', ['as' => 'ver-noticia', 'uses' => 'Web\NoticiaController@verNoticia']);
+
+Route::get('pdf-usuarios', ['as' => 'pdf-usuarios', 'uses' => 'Web\UserController@pdf']);
 
 Route::group(array('before' => 'auth'), function() {
     Route::get('perfil', ['as' => 'perfil', 'uses' => 'Web\UserController@showPerfil']);

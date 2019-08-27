@@ -11,7 +11,7 @@
         <div class="col-12">
             <div id="accordion">
                 <div class="card">
-                    <a class="card-link card-header" data-toggle="collapse" href="#collapseOne" >
+                    <a class="card-link card-header informate-secciones" data-toggle="collapse" href="#collapseOne" >
                         Tipos de violencia
                     </a>
                     <div id="collapseOne" class="collapse" data-parent="#accordion">
@@ -43,7 +43,7 @@
                 </div>
                 <br>
                 <div class="card">
-                    <a class="collapsed card-link card-header" data-toggle="collapse" href="#collapseTwo">
+                    <a class="collapsed card-link card-header informate-secciones" data-toggle="collapse" href="#collapseTwo">
                         Tipos de Modalidades
                     </a>
                     <div id="collapseTwo" class="collapse" data-parent="#accordion">
@@ -75,7 +75,7 @@
                 </div>
                 <br>
                 <div class="card">
-                    <a class="card-link card-header" data-toggle="collapse" href="#collapseThree">
+                    <a class="card-link card-header informate-secciones" data-toggle="collapse" href="#collapseThree">
                         Tus derechos
                     </a>
                     <div id="collapseThree" class="collapse" data-parent="#accordion">
@@ -96,7 +96,7 @@
                 </div>
                 <br>
                 <div class="card">
-                    <a class="card-link card-header" data-toggle="collapse" href="#collapseFour">
+                    <a class="card-link card-header informate-secciones" data-toggle="collapse" href="#collapseFour">
                         Otros sitios de interes
                     </a>
                     <div id="collapseFour" class="collapse" data-parent="#accordion">
