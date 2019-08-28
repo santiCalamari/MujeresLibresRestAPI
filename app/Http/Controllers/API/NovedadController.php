@@ -23,7 +23,7 @@ class NovedadController extends Controller {
     }
 
     public function getAll() {
-        $novedad = Novedad::where('isNew', true)->where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
+        $novedad = Novedad::where('date_at', '>=', date('Y-m-d'))->orderBy('date_at', 'ASC')->get();
         return $novedad;
     }
 
