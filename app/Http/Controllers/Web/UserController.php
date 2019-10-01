@@ -189,7 +189,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function pdf()
+    public function reporteUsuarios()
     {
         $pdf = new Fpdf();
         $pdf->AddPage();

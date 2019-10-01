@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth:api'], function() {
     Route::get('respuestas-todos/{codigo}', 'API\RespuestaController@index');
 //    Route::get('respuesta', 'API\RespuestaController@index');
 //    Route::get('respuesta/{respuesta}', 'API\RespuestaController@show');
-//    Route::post('respuesta', 'API\RespuestaController@store');
+    Route::post('respuesta/{user_id}/{cuestionario_id}', 'API\RespuestaController@store');
 //    Route::put('respuesta/{respuesta}', 'API\RespuestaController@update');
 //    Route::delete('respuesta/{respuesta}', 'API\RespuestaController@delete');
 

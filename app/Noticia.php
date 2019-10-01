@@ -17,6 +17,6 @@ class Noticia extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'description', 'date_at'];
+    protected $fillable = ['title', 'description', 'date_at', 'web_link'];
 
 }

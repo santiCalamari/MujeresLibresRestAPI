@@ -14,7 +14,7 @@ class OpinionController extends Controller
 
     public $successStatus = 200;
 
-    public function index()
+    public function index($codigo)
     {
         $semilla = 'mujeres-dev';
         if ($semilla == $codigo) {

@@ -28,7 +28,8 @@ Route::get('ver-evento/{id}', ['as' => 'ver-evento', 'uses' => 'Web\NovedadContr
 Route::get('Ver-efemeride/{id}', ['as' => 'ver-efemeride', 'uses' => 'Web\NovedadController@verEfemeride']);
 Route::get('Ver-noticia/{id}', ['as' => 'ver-noticia', 'uses' => 'Web\NoticiaController@verNoticia']);
 
-Route::get('pdf-usuarios', ['as' => 'pdf-usuarios', 'uses' => 'Web\UserController@pdf']);
+Route::get('pdf-usuarios', ['as' => 'pdf-usuarios', 'uses' => 'Web\UserController@reporteUsuarios']);
+Route::get('pdf-centros-ayuda', ['as' => 'pdf-usuarios', 'uses' => 'Web\CentroAyudaController@reporteCentrosAyudas']);
 
 Route::group(array('before' => 'auth'), function() {
     Route::get('perfil', ['as' => 'perfil', 'uses' => 'Web\UserController@showPerfil']);
