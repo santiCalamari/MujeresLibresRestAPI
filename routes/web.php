@@ -30,6 +30,7 @@ Route::get('Ver-noticia/{id}', ['as' => 'ver-noticia', 'uses' => 'Web\NoticiaCon
 
 Route::get('pdf-usuarios', ['as' => 'pdf-usuarios', 'uses' => 'Web\UserController@reporteUsuarios']);
 Route::get('pdf-centros-ayuda', ['as' => 'pdf-usuarios', 'uses' => 'Web\CentroAyudaController@reporteCentrosAyudas']);
+Route::get('pdf-opinion', ['as' => 'pdf-opinion', 'uses' => 'Web\OpinionController@reporteOpinion']);
 
 Route::group(array('before' => 'auth'), function() {
     Route::get('perfil', ['as' => 'perfil', 'uses' => 'Web\UserController@showPerfil']);
