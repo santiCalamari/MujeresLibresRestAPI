@@ -221,4 +221,110 @@ class OpinionController extends Controller
         $this->Cell(170, 5, 'Municipalidad de Santa Fe - Universidad Nacional del Litoral', 0, 0, 'L');
         $this->Cell(20, 5, 'Pagina: ' . $this->PageNo() . '/ {nb}', 0, 0, 'R');
     }
+
+    /**
+     * Inicializa Tabla de un PDF.
+     *
+     * @param type $widthColumns : Array con anchos de cada columna  de la tabla. Ej: [10, 30, 20, 15, 15, 20] 
+     */
+    public function initializeTable($widthColumns)
+    {
+        $this->tableWidths = $widthColumns;
+    }
+
+    /**
+     * Row de tabla de un PDF: 
+     * 
+     * Primero se debe inicializar la tabla con los anchos de las columnas de la tabla: $this->initializeTable($widthColumns)
+     * 
+     * Por cada fila de una se debe definir:
+     * 
+     * @param type $margin - Margen izquierdo de la fila de la tabla.  Ej: 10. default: 0
+     * @param type $data - Datos de las celdas de la fila. ej: ["text col1", "text col2",... ,"text coln"]
+     * @param type $border - Celdas de la fila con borde. Ej: si = '1', no = '0', dafault ='0' 
+     * @param type $align - Alineacion del texto de cada celda de la fila. Ej:'R', dafault ='L' 
+     * @param type $filled = 0 - Celdas de la fila rellenas. Ej: i = '1', no = '0', dafault ='0' 
+     */
+    public function TableRow($margin = 0, $data, $border = 0, $align = 'L', $filled = 0)
+    {
+        //Calculate the height of the row
+        $nb = 0;
+        for ($i = 0; $i < count($data); $i++)
+            $nb = max($nb, $this->NbLines($this->tableWidths[$i], $data[$i]));
+        $h = 5 * $nb;
+
+        //Issue a page break first if needed
+        $this->CheckPageBreak($h);
+
+        //Draw the cells of the row
+        for ($i = 0; $i < count($data); $i++) {
+            $w = $this->tableWidths[$i];
+            $a = isset($align) ? $align : 'L';
+            //Save the current position
+            $x = $this->GetX();
+            $y = $this->GetY();
+            //Draw the border
+            $this->Rect($x + $margin, $y, $w, $h);
+
+            $this->Cell($margin, $h, '');
+            //Print the text
+            $this->MultiCell($w, 5, $data[$i], $border, $a, $filled);
+            //Put the position to the right of the cell
+            $this->SetXY($x + $w, $y);
+        }
+        //Go to the next line
+        $this->Ln($h);
+    }
+
+    private function CheckPageBreak($h)
+    {
+        //If the height h would cause an overflow, add a new page immediately
+        if ($this->GetY() + $h > $this->PageBreakTrigger)
+            $this->AddPage($this->CurOrientation);
+    }
+
+    private function NbLines($w, $txt)
+    {
+//Computes the number of lines a MultiCell of width w will take
+        $cw = &$this->CurrentFont['cw'];
+        if ($w == 0)
+            $w = $this->w - $this->rMargin - $this->x;
+        $wmax = ($w - 2 * $this->cMargin) * 1000 / $this->FontSize;
+        $s = str_replace("\r", '', $txt);
+        $nb = strlen($s);
+        if ($nb > 0 and $s[$nb - 1] == "\n")
+            $nb--;
+        $sep = -1;
+        $i = 0;
+        $j = 0;
+        $l = 0;
+        $nl = 1;
+        while ($i < $nb) {
+            $c = $s[$i];
+            if ($c == "\n") {
+                $i++;
+                $sep = -1;
+                $j = $i;
+                $l = 0;
+                $nl++;
+                continue;
+            }
+            if ($c == ' ')
+                $sep = $i;
+            $l+=$cw[$c];
+            if ($l > $wmax) {
+                if ($sep == -1) {
+                    if ($i == $j)
+                        $i++;
+                } else
+                    $i = $sep + 1;
+                $sep = -1;
+                $j = $i;
+                $l = 0;
+                $nl++;
+            } else
+                $i++;
+        }
+        return $nl;
+    }
 }
